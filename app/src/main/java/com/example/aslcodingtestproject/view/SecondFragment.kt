@@ -1,4 +1,4 @@
-package com.example.aslcodingtestproject
+package com.example.aslcodingtestproject.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.aslcodingtestproject.R
 import com.example.aslcodingtestproject.databinding.FragmentSecondBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
+@AndroidEntryPoint
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
