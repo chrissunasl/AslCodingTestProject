@@ -4,14 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.autotoll.ffts.model.constant.IConstants
+import com.example.aslcodingtestproject.MainApplication
 import com.example.aslcodingtestproject.model.database.structure.PhotoBase
 import com.example.aslcodingtestproject.model.remote.Resource
 import com.example.aslcodingtestproject.model.remote.performNonTokenGetOperation
 import com.example.aslcodingtestproject.model.remote.requestobj.BaseRequest
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoResp
+import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespX
 import com.example.aslcodingtestproject.model.remote.service.NonTokenService
 import kotlinx.coroutines.Dispatchers
 import retrofit2.Response
+import timber.log.Timber
 import java.security.interfaces.RSAPublicKey
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -21,36 +24,32 @@ class PhotoRepository @Inject constructor(
     private val apiService: NonTokenService
 ) {
 
-    fun getPhoto(): LiveData<Resource<GetPhotoResp>> = liveData(Dispatchers.IO) {
-        // Current Request Date Time
+//    fun getPhoto(): GetPhotoResp? = performNonTokenGetOperation(
+//        val nowDateTime = DateTimeFormatter.ofPattern(
+//            IConstants.BASIC.AsymmetricKeyDateTimeFormat
+//        ).format(ZonedDateTime.now())
+//        try {
+//
+//            val response = apiService.getImg(nowDateTime).execute()
+//
+//
+//            Timber.i("getRetryAsymmetricKey(), ${response}")
+//
+//            return response
+//        } catch (e: Exception) {
+//            // If any encryption Error
+//            return null
+//        }
+//
+//        )
 
-        val time = ZonedDateTime.now()
-
+    suspend fun getPhoto(): Response<GetPhotoRespX> {
         val nowDateTime = DateTimeFormatter.ofPattern(
             IConstants.BASIC.AsymmetricKeyDateTimeFormat
-        )
-            .format(time)  //In case that server time is not the same with client time
+        ).format(ZonedDateTime.now())
 
-        // Execute Request
-        var response: Response<*>? = null
-        try {
-            response = apiService.getImg(nowDateTime)
+        return apiService.getImg(nowDateTime)
 
-            if (response.isSuccessful && response.body()?.result == true) {
-
-                val data = response.body()
-                // Save data into Shared Preference
-
-                emit(Resource.success(data))
-                return@liveData
-            }
-
-            emit(Resource.error( "", null))
-
-        } catch (e: Exception) {
-            // If any encryption Error
-            emit(Resource.error("Error", null))
-        }
     }
 
 }

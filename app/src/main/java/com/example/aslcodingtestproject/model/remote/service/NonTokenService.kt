@@ -5,6 +5,7 @@ import com.example.aslcodingtestproject.model.database.structure.PhotoBase
 import com.example.aslcodingtestproject.model.remote.requestobj.BaseRequest
 import com.example.aslcodingtestproject.model.remote.responseobj.BaseResponse
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoResp
+import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespX
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -22,7 +23,7 @@ interface NonTokenService {
 
     @GET("photos")
     suspend fun getImg(
-        @Query("timestamp") timestamp: String,
-    ): Response<GetPhotoResp>
+        @Header("timestamp") timestamp: String,
+    ): Response<GetPhotoRespX>
 
 }

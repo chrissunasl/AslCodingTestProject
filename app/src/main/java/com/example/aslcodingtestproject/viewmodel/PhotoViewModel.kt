@@ -1,14 +1,17 @@
 package com.example.aslcodingtestproject.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.*
 import androidx.paging.*
 
 import com.example.aslcodingtestproject.model.database.structure.PhotoBase
 import com.example.aslcodingtestproject.model.remote.Resource
+import com.example.aslcodingtestproject.model.remote.performNonTokenGetOperation
 import com.example.aslcodingtestproject.model.remote.requestobj.BaseRequest
 import com.example.aslcodingtestproject.model.remote.responseobj.BaseResponse
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoResp
+import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespX
 import com.example.aslcodingtestproject.model.repository.PhotoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
@@ -23,35 +26,31 @@ import kotlin.collections.ArrayList
 class PhotoViewModel @Inject constructor(
     private val photoRepository: PhotoRepository,
 
-) : ViewModel() {
+    ) : ViewModel() {
 
     // Data for observing
-    var photo = MutableLiveData<GetPhotoResp?>()
+    var photo = MutableLiveData<GetPhotoRespX?>()
 
-    fun getPhoto(viewLifecycleOwner: LifecycleOwner) {
-
+    suspend fun getPhoto() {
+        Timber.i("getPhoto")
         val start = Calendar.getInstance()
 
-        CoroutineScope(Dispatchers.IO).launch {
-            async {
-                photoRepository.getPhoto().observe(viewLifecycleOwner){
-                    when (it.status) {
-                        Resource.Status.LOADING -> {}
-                        Resource.Status.SUCCESS -> {
-                            val resp = it.data
-                            photo.postValue(resp)
-                        }
-                        else -> {
-                            photo.postValue(null)
-                        }
-                    }
-                }
-            }
+//        CoroutineScope(Dispatchers.IO).launch {
+//            val response = photoRepository.getPhoto()
+//            withContext(Dispatchers.Main) {
+//                photo.postValue(response.body())
+//            }
+//        }.invokeOnCompletion {
+//            Timber.i("getPhoto().end, cost: ${(Calendar.getInstance().timeInMillis - start.timeInMillis)} ms")
+//        }
 
-        }.invokeOnCompletion {
-            Timber.i("getPhoto complete, cost: ${(Calendar.getInstance().timeInMillis - start.timeInMillis)} ms")
-
+        try {
+            val response = photoRepository.getPhoto()
+            photo.postValue(response.body())
+            Log.d("chris","photoRepository.getPhoto(): $photo")
+        }catch (e: Exception){
+            photo.postValue(null)
+            Log.e("chris","e: $e")
         }
-
     }
 }

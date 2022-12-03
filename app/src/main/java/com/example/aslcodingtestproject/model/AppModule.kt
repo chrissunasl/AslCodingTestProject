@@ -178,7 +178,6 @@ object AppModule {
     fun getNonTokenService(@Named("NonTokenRetrofit") retrofit: Retrofit): NonTokenService =
         retrofit.create(NonTokenService::class.java)
 
-
     @Singleton
     @Provides
     fun provideDatabase(@ApplicationContext appContext: Context) =

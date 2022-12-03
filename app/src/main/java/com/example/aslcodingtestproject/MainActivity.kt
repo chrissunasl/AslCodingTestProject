@@ -1,6 +1,7 @@
 package com.example.aslcodingtestproject
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -13,8 +14,13 @@ import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.aslcodingtestproject.databinding.ActivityMainBinding
+import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespX
 import com.example.aslcodingtestproject.viewmodel.PhotoViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -23,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private val photoViewModel: PhotoViewModel by viewModels()
+    private var photo : GetPhotoRespX? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,10 +48,22 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 
-        Timber.i("photo")
-        photoViewModel.photo.observe(this) { photo ->
-            Timber.i("photo: $photo")
+        Log.d("chris", "photoViewModel.photo")
+        photoViewModel.photo.observe(this) { data ->
+            this.photo = data
+            Log.d("chris","photoViewModel.photo.observe(this): $data")
+            Log.d("chris","photoViewModel.photo.observe(this): ${this.photo}")
         }
+
+        Log.d("chris", "photoViewModel.photo value $photo")
+
+
+        CoroutineScope(Dispatchers.IO).launch {
+            photoViewModel.getPhoto()
+        }.invokeOnCompletion {
+            Log.d("chris","photo: ${this.photo}")
+        }
+        //photoViewModel.getPhoto()
 
     }
 
