@@ -48,21 +48,21 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 
-        Log.d("chris", "photoViewModel.photo")
-        photoViewModel.photo.observe(this) { data ->
-            this.photo = data
-            Log.d("chris","photoViewModel.photo.observe(this): $data")
-            Log.d("chris","photoViewModel.photo.observe(this): ${this.photo}")
-        }
-
-        Log.d("chris", "photoViewModel.photo value $photo")
-
-
-        CoroutineScope(Dispatchers.IO).launch {
-            photoViewModel.getPhoto()
-        }.invokeOnCompletion {
-            Log.d("chris","photo: ${this.photo}")
-        }
+//        Log.d("chris", "photoViewModel.photo")
+//        photoViewModel.photo.observe(this) { data ->
+//            this.photo = data
+//            Log.d("chris","photoViewModel.photo.observe(this): $data")
+//            Log.d("chris","photoViewModel.photo.observe(this): ${this.photo}")
+//        }
+//
+//        Log.d("chris", "photoViewModel.photo value $photo")
+//
+//
+//        CoroutineScope(Dispatchers.IO).launch {
+//            photoViewModel.getPhoto()
+//        }.invokeOnCompletion {
+//            Log.d("chris","photo: ${this.photo}")
+//        }
         //photoViewModel.getPhoto()
 
     }
