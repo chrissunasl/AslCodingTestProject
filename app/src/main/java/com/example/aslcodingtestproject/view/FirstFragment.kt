@@ -59,6 +59,7 @@ class FirstFragment : Fragment() {
             Log.d("chris","photoViewModel.photo.observe(this): ${this.photo}")
         }
 
+
         Log.d("chris", "photoViewModel.photo value $photo")
 
 
