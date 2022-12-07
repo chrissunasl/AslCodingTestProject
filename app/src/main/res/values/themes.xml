@@ -22,4 +22,10 @@
     <style name="Theme.AslCodingTestProject.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.AslCodingTestProject.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen_layout</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>

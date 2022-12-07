@@ -6,6 +6,8 @@ import com.google.gson.JsonSyntaxException
 import okhttp3.logging.HttpLoggingInterceptor
 import timber.log.Timber
 
+
+// Http log
 object MyHttpLoggingInterceptor {
 
     fun getInstance(): HttpLoggingInterceptor {

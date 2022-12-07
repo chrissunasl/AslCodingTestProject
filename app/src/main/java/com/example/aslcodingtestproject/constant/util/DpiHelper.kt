@@ -3,9 +3,8 @@ package com.example.aslcodingtestproject.constant.util
 import android.content.Context
 import android.util.DisplayMetrics
 
-
+// Dpi related obj
 object DpiHelper {
-
 
     fun getDeviceDensityString(context: Context): String {
         return when (context.resources.displayMetrics.densityDpi) {

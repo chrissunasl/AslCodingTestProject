@@ -7,15 +7,15 @@ import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespIte
 
 // Data Access Object, as app need to save record to database
 @Dao
-interface PhotoDao {
+interface PhotoDetailDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(getPhotoRespItem: ArrayList<GetPhotoRespItem>)
+    fun insertPhotoDetail(getPhotoRespItem: ArrayList<GetPhotoDetailRespItem>)
 
-    @Query("SELECT * FROM GetPhotoRespItem ORDER BY title ASC")
-    fun queryPhotoList(): LiveData<MutableList<GetPhotoRespItem>>
+    @Query("SELECT * FROM GetPhotoDetailRespItem ORDER BY id ASC LIMIT 20")
+    fun queryPhotoDetailList(): LiveData<MutableList<GetPhotoDetailRespItem>>
 
-    @Query("DELETE FROM GetPhotoRespItem")
-    fun deleteAll(): Int
+    @Query("DELETE FROM GetPhotoDetailRespItem")
+    fun deleteAllPhotoDetail(): Int
 
 }

@@ -179,4 +179,12 @@ dependencies {
 
     // Indicator for tab button
     implementation 'io.github.vejei.viewpagerindicator:viewpagerindicator:1.0.0-alpha.1'
+
+    // Coil
+    implementation "io.coil-kt:coil:2.2.2"
+
+    implementation 'com.squareup.picasso:picasso:2.8'
+
+    // Moshi
+    implementation 'com.squareup.moshi:moshi-kotlin:1.9.3'
 }

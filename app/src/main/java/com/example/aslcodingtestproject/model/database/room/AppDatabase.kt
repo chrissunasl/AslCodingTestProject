@@ -5,22 +5,27 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.aslcodingtestproject.model.converter.DateConverter
-import com.example.aslcodingtestproject.model.database.dao.PhotoDao
-import com.example.aslcodingtestproject.model.database.structure.PhotoBase
 
+import com.example.aslcodingtestproject.model.database.dao.PhotoDao
+import com.example.aslcodingtestproject.model.database.dao.PhotoDetailDao
+import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailRespItem
+import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
+
+// Room Library config
 
 @Database(
     entities = [
-        PhotoBase::class,
+        GetPhotoRespItem::class,
+        GetPhotoDetailRespItem::class
     ],
-    version = 13,
+    version = 14,
     exportSchema = false
 )
-@TypeConverters(DateConverter::class)
+
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun getVehicleDao(): PhotoDao
+    abstract fun getPhotoDao(): PhotoDao
+    abstract fun getPhotoDetailDao(): PhotoDetailDao
 
     companion object {
         @Volatile
@@ -38,16 +43,13 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun buildDatabase(appContext: Context): AppDatabase {
 
-//            val passphrase: ByteArray = SQLiteDatabase.getBytes("userEnteredPassphrase".toCharArray())
-//            val factory = SupportFactory(passphrase)
+
 
             return Room.databaseBuilder(
                 appContext,
                 AppDatabase::class.java,
                 DB_Name
             ).fallbackToDestructiveMigration()
-                .addTypeConverter(DateConverter())
-//                .openHelperFactory(factory)
                 .build()
 
         }

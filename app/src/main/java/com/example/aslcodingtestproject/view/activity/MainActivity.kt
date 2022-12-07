@@ -1,8 +1,6 @@
-package com.example.aslcodingtestproject
+package com.example.aslcodingtestproject.view.activity
 
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,17 +9,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import com.example.aslcodingtestproject.R
 import com.example.aslcodingtestproject.databinding.ActivityMainBinding
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespX
 import com.example.aslcodingtestproject.viewmodel.PhotoViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -42,27 +34,6 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-//        Log.d("chris", "photoViewModel.photo")
-//        photoViewModel.photo.observe(this) { data ->
-//            this.photo = data
-//            Log.d("chris","photoViewModel.photo.observe(this): $data")
-//            Log.d("chris","photoViewModel.photo.observe(this): ${this.photo}")
-//        }
-//
-//        Log.d("chris", "photoViewModel.photo value $photo")
-//
-//
-//        CoroutineScope(Dispatchers.IO).launch {
-//            photoViewModel.getPhoto()
-//        }.invokeOnCompletion {
-//            Log.d("chris","photo: ${this.photo}")
-//        }
-        //photoViewModel.getPhoto()
 
     }
 

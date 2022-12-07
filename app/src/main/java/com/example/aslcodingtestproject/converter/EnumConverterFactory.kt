@@ -1,10 +1,11 @@
-package com.example.aslcodingtestproject.model.converter
+package com.example.aslcodingtestproject.converter
 
 import com.google.gson.annotations.SerializedName
 import retrofit2.Converter
 import retrofit2.Retrofit
 import java.lang.reflect.Type
 
+// Enum factory for retrofit
 class EnumConverterFactory : Converter.Factory() {
     override fun stringConverter(type: Type?, annotations: Array<out Annotation>?,
                                  retrofit: Retrofit?): Converter<*, String>? {

@@ -6,3 +6,4 @@ open class GetPhotoResp(
     var photo_id: Int?,
     var photo_url: String?,
 ) : BaseResponse()
+

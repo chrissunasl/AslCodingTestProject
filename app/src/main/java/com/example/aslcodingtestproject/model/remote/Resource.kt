@@ -2,7 +2,7 @@ package com.example.aslcodingtestproject.model.remote
 
 import com.example.aslcodingtestproject.model.remote.responseobj.BaseResponse
 
-
+// http state control
 data class Resource<out T>(val status: Status, val data: T?, val message: String?, val response: BaseResponse? = null) {
 
     enum class Status {

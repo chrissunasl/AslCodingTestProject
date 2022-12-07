@@ -3,26 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/PhotoThumbnailListFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.aslcodingtestproject.view.FirstFragment"
+        android:id="@+id/PhotoThumbnailListFragment"
+        android:name="com.example.aslcodingtestproject.view.fragment.PhotoThumbnailListFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_photo_detail">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/actionPhotoThumbnailListFragmentToPhotoDetailFragment"
+            app:destination="@id/PhotoDetailFragment">
+
+            <argument
+                android:name="photoItem"
+                app:argType="com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem"
+                app:nullable="false" />
+
+        </action>
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.aslcodingtestproject.view.SecondFragment"
+        android:id="@+id/PhotoDetailFragment"
+        android:name="com.example.aslcodingtestproject.view.fragment.PhotoDetailFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_photo_thumbnail_list">
+
+        <argument
+            android:name="photoItem"
+            app:argType="com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem"
+            app:nullable="false" />
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/actionPhotoDetailFragmentToPhotoThumbnailListFragment"
+            app:destination="@id/PhotoThumbnailListFragment" />
     </fragment>
 </navigation>

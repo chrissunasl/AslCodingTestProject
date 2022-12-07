@@ -23,19 +23,20 @@ fun <A> performNonTokenGetOperation(
 
         // Decrypt Data and update database
         getCallResult.invoke(response.body())
+        emit(Resource.success(response.body()))
 
-        if (response.isSuccessful)
-        // Submit data to View Model
-            emit(Resource.success(response.body()))
-        else {
-
-            Timber.e("performBaseGetOperation(), httpCode: ${response.code()},\n errorBody: ${response.errorBody()}")
-            emit(
-                Resource.error(
-                    "Error", response.body()
-                )
-            )
-        }
+//        if (response.isSuccessful)
+//        // Submit data to View Model
+//            emit(Resource.success(response.body()))
+//        else {
+//
+//            Timber.e("performBaseGetOperation(), httpCode: ${response.code()},\n errorBody: ${response.errorBody()}")
+//            emit(
+//                Resource.error(
+//                    "Error", response.body()
+//                )
+//            )
+//        }
 
 
     } catch (e: Exception) {

@@ -1,9 +1,9 @@
 package com.autotoll.ffts.model.constant
 
+//Common constant
 object IConstants {
 
     object DomainName {
-        const val API_DOMAIN_ReCaptcha = "https://captcha-dev.atlsmartsolutions.com/"
         const val API_DOMAIN_Google = "https://www.google.com/"
         const val API_DOMAIN_JSONPLACEHOLDER = "https://jsonplaceholder.typicode.com/"
     }

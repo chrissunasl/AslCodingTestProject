@@ -8,6 +8,7 @@ import timber.log.Timber
 import java.io.IOException
 import java.net.SocketException
 
+// Header controller
 object HeaderInterceptor {
 
 
