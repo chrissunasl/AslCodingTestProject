@@ -9,20 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.aslcodingtestproject.R
 import com.example.aslcodingtestproject.constant.util.OnCustomItemClickListener
 import com.example.aslcodingtestproject.databinding.FragmentPhotoThumbnailListBinding
 import com.example.aslcodingtestproject.model.remote.CheckInternet
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoResp
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespX
 import com.example.aslcodingtestproject.view.adapter.PhotoListAdapter
 import com.example.aslcodingtestproject.view.event.OnLoadingEventListener
 import com.example.aslcodingtestproject.viewmodel.PhotoViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import timber.log.Timber
 
 /**
@@ -51,9 +45,6 @@ class PhotoThumbnailListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Timber.i("onViewCreated")
-//        binding.buttonFirst.setOnClickListener {
-//            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-//        }
 
         init()
         viewModelInit()

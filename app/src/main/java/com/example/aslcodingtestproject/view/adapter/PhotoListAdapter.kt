@@ -5,27 +5,13 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Filterable
-import android.widget.ImageView
-import androidx.core.net.toUri
 import androidx.lifecycle.LifecycleOwner
-import androidx.recyclerview.widget.AsyncDifferConfig
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.aslcodingtestproject.R
 import com.example.aslcodingtestproject.constant.util.OnCustomItemClickListener
-import com.example.aslcodingtestproject.converter.ImageHandler.bindImageWithUrl
+import com.example.aslcodingtestproject.view.viewmanager.ImageHandler.bindImageWithUrl
 import com.example.aslcodingtestproject.databinding.ItemPhotoHolderThumbnailBinding
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespX
-import com.squareup.picasso.Picasso
 import java.util.ArrayList
-import java.util.concurrent.Executors
-import kotlin.math.roundToInt
 
 //Cus adapter for list
 
@@ -76,19 +62,6 @@ class PhotoListAdapter(
             binding.executePendingBindings()
             bindImageWithUrl(binding.ivPhoto, item.thumbnailUrl)
 
-//            item.thumbnailUrl.let {
-//                val imgUri = item.thumbnailUrl.toUri().buildUpon().scheme("https").build()
-//                binding.ivPhoto.load(imgUri) {
-//                    placeholder(R.drawable.loading_animation)
-//                    error(R.drawable.ic_broken_image)
-//                }
-//            }
-
-//            Picasso.get()
-//                .load(item.thumbnailUrl.toUri().buildUpon().scheme("https").build())
-//                .placeholder(R.drawable.loading_animation)
-//                .error(R.drawable.ic_broken_image)
-//                .into(binding.ivPhoto);
 
             binding.cvPhoto.setOnClickListener {
                 onCustomItemClickListener.onClick(it, item)

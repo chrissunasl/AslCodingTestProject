@@ -17,42 +17,16 @@
 package com.example.aslcodingtestproject.view.adapter
 
 
-import android.annotation.SuppressLint
-import android.util.Log
 import android.widget.ImageView
-import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.example.aslcodingtestproject.view.viewmanager.ImageHandler
 
-import com.example.aslcodingtestproject.R
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
-
-/**
- * Updates the data shown in the [RecyclerView].
- */
-@SuppressLint("NotifyDataSetChanged")
-@BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: MutableList<GetPhotoRespItem>?) {
-    val adapter = recyclerView.adapter as PhotoListAdapter
-    Log.d("chris", "bindRecyclerView, data: $data")
-    if (data != null) {
-        adapter.addList(data)
-    }
-    adapter.notifyDataSetChanged()
-}
 
 /**
  * Uses the Coil library to load an image by URL into an [ImageView]
  */
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
-    imgUrl?.let {
-        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
-        imgView.load(imgUri) {
-            placeholder(R.drawable.loading_animation)
-            error(R.drawable.ic_broken_image)
-        }
-    }
+    ImageHandler.bindImageWithUrl(imgView, imgUrl)
 }
 

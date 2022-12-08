@@ -12,6 +12,7 @@ import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailR
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
 
 // Room Library config
+// Connecting Dao
 
 @Database(
     entities = [
@@ -42,8 +43,6 @@ abstract class AppDatabase : RoomDatabase() {
 
 
         private fun buildDatabase(appContext: Context): AppDatabase {
-
-
 
             return Room.databaseBuilder(
                 appContext,

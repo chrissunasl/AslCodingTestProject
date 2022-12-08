@@ -22,6 +22,8 @@ import javax.inject.Singleton
 
 /**
  * Retrofit
+ * Seperate to different types of retrofit
+ * Eg: Need Token
  */
 @Module
 @InstallIn(SingletonComponent::class)
@@ -46,9 +48,6 @@ object AppModule {
         .addConverterFactory(EnumConverterFactory())
         .build()
 
-
-
-    // Service Before Login
     @Singleton
     @Provides
     fun getNonTokenService(@Named("NonTokenRetrofit") retrofit: Retrofit): NonTokenService =

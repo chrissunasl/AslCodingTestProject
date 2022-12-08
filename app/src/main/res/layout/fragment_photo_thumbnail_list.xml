@@ -3,12 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
 
-        <variable
-            name="viewModel"
-            type="com.example.aslcodingtestproject.viewmodel.PhotoViewModel" />
-    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -65,7 +60,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:listData="@{viewModel.photoFromDb}"
+
                 app:spanCount="2"
                 tools:listitem="@layout/item_photo_holder_thumbnail" />
 

@@ -8,19 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.example.aslcodingtestproject.R
 import com.example.aslcodingtestproject.constant.util.OnCustomItemClickListener
-import com.example.aslcodingtestproject.converter.ImageHandler
+import com.example.aslcodingtestproject.view.viewmanager.ImageHandler
 import com.example.aslcodingtestproject.databinding.FragmentPhotoDetailBinding
-import com.example.aslcodingtestproject.model.remote.CheckInternet
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailRespItem
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
 import com.example.aslcodingtestproject.view.adapter.PhotoCommentAdapter
 import com.example.aslcodingtestproject.view.event.OnLoadingEventListener
 import com.example.aslcodingtestproject.viewmodel.PhotoViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 //
 @AndroidEntryPoint

@@ -25,13 +25,6 @@ class PhotoViewModel @Inject constructor(
     private val photoRepository: PhotoRepository,
     ) : ViewModel() {
 
-    // Internally, we use a MutableLiveData, because we will be updating the List of MarsPhoto
-    // with new values
-    private var _photos = MutableLiveData<List<GetPhotoRespItem>>()
-
-    // The external LiveData interface to the property is immutable, so only this class can modify
-    var photos: MutableLiveData<ArrayList<GetPhotoRespItem>> = MutableLiveData()
-
     fun getPhotoFromDb() = photoRepository.getPhotoFromDb()
 
 

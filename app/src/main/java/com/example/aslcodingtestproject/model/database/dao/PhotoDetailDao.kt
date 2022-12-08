@@ -5,7 +5,7 @@ import androidx.room.*
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailRespItem
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
 
-// Data Access Object, as app need to save record to database
+// Data Access Object, as app need to save record to local database for offline
 @Dao
 interface PhotoDetailDao {
 
