@@ -2,6 +2,7 @@ package com.example.aslcodingtestproject.view.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -29,6 +30,15 @@ class PhotoDetailFragment : Fragment() {
     private val photoViewModel: PhotoViewModel by viewModels()
     private lateinit var photoCommentAdapter: PhotoCommentAdapter
     private lateinit var args: PhotoDetailFragmentArgs
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val animation = TransitionInflater.from(requireContext()).inflateTransition(
+            android.R.transition.move
+        )
+        sharedElementEnterTransition = animation
+        sharedElementReturnTransition = animation
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -77,6 +87,7 @@ class PhotoDetailFragment : Fragment() {
     }
 
     private fun viewModelInit() {
+
         photoViewModel.getPhotoDetailFromDb().observe(viewLifecycleOwner) { data ->
             Log.d("chris", "viewModelInit() data: $data")
 

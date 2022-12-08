@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aslcodingtestproject.constant.util.OnCustomItemClickListener
@@ -43,6 +44,7 @@ class PhotoListAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val data = dataList[position]
+        ViewCompat.setTransitionName(holder.itemView, dataList[position].id.toString())
         holder.bind(data, position)
     }
 

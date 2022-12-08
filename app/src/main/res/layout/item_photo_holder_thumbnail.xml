@@ -33,6 +33,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/divider"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:transitionName="ivPhotoSmall"
                 app:imageUrl="@{photo.thumbnailUrl}"
                 android:minHeight="100dp"
                 android:maxHeight="600dp"/>

@@ -1,82 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".view.fragment.PhotoThumbnailListFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBar"
+        <variable
+            name="photo"
+            type="com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@id/llRefresh"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".view.fragment.PhotoThumbnailListFragment">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/tvTitle"
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:contentScrim="#375de4"
-            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:title="Comment">
+            android:background="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/llRefresh"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:background="@drawable/custom_app_bar_background"
-                android:orientation="vertical"
-                android:paddingHorizontal="20dp">
+                android:layout_height="wrap_content"
+                app:contentScrim="#375de4"
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+                app:title="Comment">
 
-                <TextView
-                    android:id="@+id/tvTitleSupport"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="70dp"
-                    android:text="Comment"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/ivPhoto"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:background="@drawable/custom_app_bar_background"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="20dp">
+
+                    <TextView
+                        android:id="@+id/tvTitleSupport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="70dp"
+                        android:text="Comment"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@id/ivPhoto"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
-                <ImageView
-                    android:id="@+id/ivPhoto"
+                    <ImageView
+                        android:id="@+id/ivPhoto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitXY"
+                        android:minHeight="150dp"
+                        android:transitionName="ivPhotoBig"
+                        android:layout_marginBottom="70dp"
+                        app:imageUrl="@{photo.url}"
+                        tools:src="@drawable/flower"
+                        android:layout_gravity="center" />
+
+                </LinearLayout>
+
+
+                <androidx.appcompat.widget.Toolbar
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="200dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvTitleSupport" />
+                    android:layout_height="?attr/actionBarSize"
 
-            </LinearLayout>
+                    />
 
-
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-
-                />
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/llRefresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBar"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            >
+            app:layout_constraintTop_toBottomOf="@id/appBar">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvPhotoThumbnail"
@@ -84,12 +94,11 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                                app:spanCount="1"
+                app:spanCount="1"
                 tools:listitem="@layout/item_photo_holder_comments" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
-
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

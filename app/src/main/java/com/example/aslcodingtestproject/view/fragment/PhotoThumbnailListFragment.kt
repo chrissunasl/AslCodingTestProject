@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import com.example.aslcodingtestproject.R
 import com.example.aslcodingtestproject.constant.util.OnCustomItemClickListener
 import com.example.aslcodingtestproject.databinding.FragmentPhotoThumbnailListBinding
 import com.example.aslcodingtestproject.model.remote.CheckInternet
@@ -56,10 +58,20 @@ class PhotoThumbnailListFragment : Fragment() {
         photoListAdapter = PhotoListAdapter(requireActivity(),
             onCustomItemClickListener = object : OnCustomItemClickListener<GetPhotoRespItem> {
                 override fun onClick(view: View?, item: GetPhotoRespItem) {
+                    val extras = FragmentNavigatorExtras(view!! to "ivPhotoBig")
+                    val args : Bundle = Bundle()
+                    args.putParcelable("photoItem", item)
+
+//                    findNavController().navigate(
+//                        PhotoThumbnailListFragmentDirections.actionPhotoThumbnailListFragmentToPhotoDetailFragment(
+//                            item
+//                        )
+//                    )
                     findNavController().navigate(
-                        PhotoThumbnailListFragmentDirections.actionPhotoThumbnailListFragmentToPhotoDetailFragment(
-                            item
-                        )
+                        resId = R.id.actionPhotoThumbnailListFragmentToPhotoDetailFragment,
+                        args = args,
+                        navOptions = null,
+                        navigatorExtras = extras
                     )
                 }
             },
