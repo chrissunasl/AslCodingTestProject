@@ -25,8 +25,8 @@ class PhotoViewModel @Inject constructor(
     private val photoRepository: PhotoRepository,
     ) : ViewModel() {
 
-    fun getPhotoFromDb() = photoRepository.getPhotoFromDb()
 
+    fun getPhotoFromDb() = photoRepository.getPhotoFromDb()
 
     fun getPhotoFromApi(
         viewLifecycleOwner: LifecycleOwner,

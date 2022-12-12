@@ -90,6 +90,7 @@ class PhotoThumbnailListFragment : Fragment() {
     }
 
     private fun viewModelInit() {
+        // Directly observe database data
         photoViewModel.getPhotoFromDb().observe(viewLifecycleOwner) { data ->
             Log.d("chris", "photoViewModel.photo.observe(this), data: $data")
             if(data.isNullOrEmpty()){
