@@ -9,6 +9,7 @@ import androidx.paging.*
 import com.example.aslcodingtestproject.model.remote.Resource
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespX
+import com.example.aslcodingtestproject.model.repository.PhotoDatabaseRepository
 import com.example.aslcodingtestproject.model.repository.PhotoRepository
 import com.example.aslcodingtestproject.view.event.OnLoadingEventListener
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,10 +24,19 @@ import kotlin.collections.ArrayList
 @HiltViewModel
 class PhotoViewModel @Inject constructor(
     private val photoRepository: PhotoRepository,
-    ) : ViewModel() {
+    private val photoDatabaseRepository: PhotoDatabaseRepository
+) : ViewModel() {
 
+    val photo: MutableLiveData<ArrayList<GetPhotoRespItem>?> = MutableLiveData()
 
-    fun getPhotoFromDb() = photoRepository.getPhotoFromDb()
+    val photoDatabase: MutableLiveData<ArrayList<GetPhotoRespItem>?> = MutableLiveData()
+
+    fun savePhotoIntoDatabase(photoList: ArrayList<GetPhotoRespItem>) {
+        photoDatabaseRepository.savePhotoIntoDatabase(photoList)
+    }
+
+    fun getPhotoFromDb() = photoDatabaseRepository.getPhotoFromDb()
+
 
     fun getPhotoFromApi(
         viewLifecycleOwner: LifecycleOwner,
@@ -36,13 +46,21 @@ class PhotoViewModel @Inject constructor(
             .observe(viewLifecycleOwner) {
 
                 when (it.status) {
-                    Resource.Status.LOADING -> {onLoadingListener.startLoading()}
+                    Resource.Status.LOADING -> {
+                        onLoadingListener.startLoading()
+                    }
                     Resource.Status.SUCCESS -> {
                         Log.d("chris", "GetPhotoRespItem: ${it.data}")
+
+//                        if(!it.data.isNullOrEmpty()){
+//                            photoRepository.savePhotoIntoDatabase(it.data)
+//                        }
+                        photo.postValue(it.data)
                         onLoadingListener.stopLoading()
                     }
 
                     Resource.Status.ERROR -> {
+                        photo.postValue(ArrayList())
                         onLoadingListener.stopLoading()
                     }
                 }
@@ -60,7 +78,9 @@ class PhotoViewModel @Inject constructor(
             .observe(viewLifecycleOwner) {
 
                 when (it.status) {
-                    Resource.Status.LOADING -> {onLoadingListener.startLoading()}
+                    Resource.Status.LOADING -> {
+                        onLoadingListener.startLoading()
+                    }
                     Resource.Status.SUCCESS -> {
 
                         onLoadingListener.stopLoading()
@@ -73,7 +93,10 @@ class PhotoViewModel @Inject constructor(
             }
     }
 
-    fun search(keyword: String, dataList: MutableList<GetPhotoRespItem>): ArrayList<GetPhotoRespItem> {
+    fun search(
+        keyword: String,
+        dataList: MutableList<GetPhotoRespItem>
+    ): ArrayList<GetPhotoRespItem> {
         val resultList = ArrayList<GetPhotoRespItem>()
         val patter = keyword.uppercase(Locale.getDefault()).toRegex()
         dataList.forEach { data ->

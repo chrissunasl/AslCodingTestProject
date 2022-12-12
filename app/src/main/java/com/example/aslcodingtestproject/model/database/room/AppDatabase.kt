@@ -19,7 +19,7 @@ import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespIte
         GetPhotoRespItem::class,
         GetPhotoDetailRespItem::class
     ],
-    version = 14,
+    version = 15,
     exportSchema = false
 )
 

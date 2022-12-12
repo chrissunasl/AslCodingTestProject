@@ -22,33 +22,25 @@ class PhotoRepository @Inject constructor(
     private val detailDao: PhotoDetailDao
 ) {
 
+    fun getPhotoFromApi() = performNonTokenGetOperation(
+        networkCall = {
+            val nowDateTime = DateTimeFormatter.ofPattern(
+                IConstants.BASIC.AsymmetricKeyDateTimeFormat
+            ).format(ZonedDateTime.now())
+            apiService.getImg(nowDateTime)
+        }
+    )
 
+    fun savePhotoIntoDatabase(photoList: ArrayList<GetPhotoRespItem>) {
+        if(photoList.isNotEmpty()){
+            Log.d("chris", "savePhotoIntoDatabase $photoList")
+            dao.insert(photoList)
+        }
 
-    fun getPhotoFromDb() = dao.queryPhotoList()
-
-    fun getPhotoFromApi(): LiveData<Resource<ArrayList<GetPhotoRespItem>>> {
-        val nowDateTime = DateTimeFormatter.ofPattern(
-            IConstants.BASIC.AsymmetricKeyDateTimeFormat
-        ).format(ZonedDateTime.now())
-
-        //val dataList = apiService.getImg(nowDateTime)
-
-        return performNonTokenGetOperation(
-            networkCall = {
-                apiService.getImg(nowDateTime)
-            },
-            getCallResult = {
-
-                if (it != null) {
-                    Log.d("chris", "getPhotoFromApi(), $it")
-                    dao.insert(it)
-                }
-            }
-
-        )
     }
 
-
+    // Repository to separate Dao & viewModel
+    fun getPhotoFromDb() = dao.queryPhotoList()
 
 
     fun getPhotoDetailFromDb() = detailDao.queryPhotoDetailList()
@@ -73,7 +65,6 @@ class PhotoRepository @Inject constructor(
 
         )
     }
-
 
 
 }

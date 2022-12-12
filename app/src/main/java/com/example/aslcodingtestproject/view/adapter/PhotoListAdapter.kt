@@ -12,7 +12,7 @@ import com.example.aslcodingtestproject.constant.util.OnCustomItemClickListener
 import com.example.aslcodingtestproject.view.viewmanager.ImageHandler.bindImageWithUrl
 import com.example.aslcodingtestproject.databinding.ItemPhotoHolderThumbnailBinding
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
-import java.util.ArrayList
+import kotlin.collections.ArrayList
 
 //Cus adapter for list
 
@@ -22,10 +22,10 @@ class PhotoListAdapter(
     private val lifecycleOwner: LifecycleOwner
 ) : RecyclerView.Adapter<PhotoListAdapter.ItemViewHolder>() {
 
-    var dataList: MutableList<GetPhotoRespItem> = ArrayList()
+    var dataList: ArrayList<GetPhotoRespItem> = ArrayList()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addList(list: MutableList<GetPhotoRespItem>) {
+    fun addList(list: ArrayList<GetPhotoRespItem>) {
         this.dataList = list
         Log.d("chris", "addList, list: ${this.dataList.toString()}")
         notifyDataSetChanged()
@@ -43,7 +43,7 @@ class PhotoListAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val data = dataList[position]
+        val data = dataList.get(position)
         ViewCompat.setTransitionName(holder.itemView, dataList[position].id.toString())
         holder.bind(data, position)
     }
