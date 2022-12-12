@@ -29,14 +29,11 @@ class PhotoViewModel @Inject constructor(
 
     val photo: MutableLiveData<ArrayList<GetPhotoRespItem>?> = MutableLiveData()
 
-    val photoDatabase: MutableLiveData<ArrayList<GetPhotoRespItem>?> = MutableLiveData()
-
     fun savePhotoIntoDatabase(photoList: ArrayList<GetPhotoRespItem>) {
         photoDatabaseRepository.savePhotoIntoDatabase(photoList)
     }
 
     fun getPhotoFromDb() = photoDatabaseRepository.getPhotoFromDb()
-
 
     fun getPhotoFromApi(
         viewLifecycleOwner: LifecycleOwner,

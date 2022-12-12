@@ -18,7 +18,6 @@ import javax.inject.Inject
 // get data
 class PhotoRepository @Inject constructor(
     private val apiService: NonTokenService,
-    private val dao: PhotoDao,
     private val detailDao: PhotoDetailDao
 ) {
 
@@ -30,18 +29,6 @@ class PhotoRepository @Inject constructor(
             apiService.getImg(nowDateTime)
         }
     )
-
-    fun savePhotoIntoDatabase(photoList: ArrayList<GetPhotoRespItem>) {
-        if(photoList.isNotEmpty()){
-            Log.d("chris", "savePhotoIntoDatabase $photoList")
-            dao.insert(photoList)
-        }
-
-    }
-
-    // Repository to separate Dao & viewModel
-    fun getPhotoFromDb() = dao.queryPhotoList()
-
 
     fun getPhotoDetailFromDb() = detailDao.queryPhotoDetailList()
 

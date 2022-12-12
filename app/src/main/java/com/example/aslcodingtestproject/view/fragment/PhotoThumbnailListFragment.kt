@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.aslcodingtestproject.R
 import com.example.aslcodingtestproject.constant.util.OnCustomItemClickListener
 import com.example.aslcodingtestproject.databinding.FragmentPhotoThumbnailListBinding
+import com.example.aslcodingtestproject.model.remote.CheckInternet
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
 import com.example.aslcodingtestproject.view.adapter.PhotoListAdapter
 import com.example.aslcodingtestproject.view.event.OnLoadingEventListener
@@ -23,6 +24,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -99,8 +101,13 @@ class PhotoThumbnailListFragment : Fragment() {
         photoViewModel.photo.observe(viewLifecycleOwner) { data ->
             Log.d("chris", "photoViewModel.photo.observe(this), data: $data")
             if(data.isNullOrEmpty()){
+                binding.tvStatus.visibility = View.VISIBLE
+                binding.tvStatus.text = "No record"
 
-                getDataFromDatabase()
+                if(!CheckInternet.isOnline(requireActivity())){
+                    binding.tvStatus.text = "No Internet"
+                    getDataFromDatabase()
+                }
 
             }else{
                 binding.tvStatus.visibility = View.GONE
@@ -117,16 +124,19 @@ class PhotoThumbnailListFragment : Fragment() {
     private fun updateUI(data: ArrayList<GetPhotoRespItem>) {
         Log.d("chris", "updateUI: $data")
         data.sortWith { p1, p2 -> p1.title.compareTo(p2.title) }
-        photoDataList = data
-        photoListAdapter.addList(data)
-        photoListAdapter.notifyDataSetChanged()
+        if(data.isNotEmpty()){
+            photoDataList = data
+            photoListAdapter.addList(data)
+            photoListAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun getDataFromDatabase() {
-        photoViewModel.getPhotoFromDb().observe(viewLifecycleOwner){ data ->
+        photoViewModel.getPhotoFromDb().observe(viewLifecycleOwner){
+            data ->
             val list : ArrayList<GetPhotoRespItem> = ArrayList()
-            data.forEach { item ->
-                list.add(item)
+            data.forEach {
+                list.add(it)
             }
             updateUI(list)
         }
