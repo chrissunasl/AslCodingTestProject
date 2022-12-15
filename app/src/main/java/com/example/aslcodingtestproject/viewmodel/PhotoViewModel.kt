@@ -1,21 +1,14 @@
 package com.example.aslcodingtestproject.viewmodel
 
-import android.content.Context
 import android.util.Log
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
-import androidx.paging.*
 
 import com.example.aslcodingtestproject.model.remote.Resource
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespX
-import com.example.aslcodingtestproject.model.repository.PhotoDatabaseRepository
+import com.example.aslcodingtestproject.model.repository.local.PhotoDatabaseRepository
 import com.example.aslcodingtestproject.model.repository.PhotoRepository
 import com.example.aslcodingtestproject.view.event.OnLoadingEventListener
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
-import timber.log.Timber
-import java.sql.Timestamp
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList

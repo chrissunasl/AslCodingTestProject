@@ -19,28 +19,28 @@ import javax.inject.Inject
 class PhotoRepository @Inject constructor(
     private val apiService: NonTokenService,
     private val detailDao: PhotoDetailDao
-) {
+): BasePhotoRepository {
 
-    fun getPhotoFromApi() = performNonTokenGetOperation(
-        networkCall = {
-            val nowDateTime = DateTimeFormatter.ofPattern(
-                IConstants.BASIC.AsymmetricKeyDateTimeFormat
-            ).format(ZonedDateTime.now())
-            apiService.getImg(nowDateTime)
-        }
-    )
+    override fun getPhotoFromApi():LiveData<Resource<ArrayList<GetPhotoRespItem>>>{
+        return performNonTokenGetOperation(
+            networkCall = {
+                val nowDateTime = DateTimeFormatter.ofPattern(
+                    IConstants.BASIC.AsymmetricKeyDateTimeFormat
+                ).format(ZonedDateTime.now())
+                apiService.getImg(nowDateTime)
+            }
+        )
+    }
 
-    fun getPhotoDetailFromDb() = detailDao.queryPhotoDetailList()
+    override fun getPhotoDetailFromDb() = detailDao.queryPhotoDetailList()
 
-    fun getPhotoDetailFromApi(id: String): LiveData<Resource<ArrayList<GetPhotoDetailRespItem>>> {
-        val nowDateTime = DateTimeFormatter.ofPattern(
-            IConstants.BASIC.AsymmetricKeyDateTimeFormat
-        ).format(ZonedDateTime.now())
-
-        //val dataList = apiService.getImg(nowDateTime)
+    override fun getPhotoDetailFromApi(id: String): LiveData<Resource<ArrayList<GetPhotoDetailRespItem>>> {
 
         return performNonTokenGetOperation(
             networkCall = {
+                val nowDateTime = DateTimeFormatter.ofPattern(
+                    IConstants.BASIC.AsymmetricKeyDateTimeFormat
+                ).format(ZonedDateTime.now())
                 apiService.getImgDetail(nowDateTime, id = id)
             },
             getCallResult = {

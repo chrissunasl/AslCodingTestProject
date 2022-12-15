@@ -1,5 +1,6 @@
 package com.example.aslcodingtestproject.viewmodel
 
+import com.example.aslcodingtestproject.viewmodel.PhotoViewModel
 import org.junit.Assert.*
 
 import org.junit.Before

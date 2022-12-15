@@ -1,9 +1,8 @@
-package com.autotoll.ffts.di.module
+package com.example.aslcodingtestproject.model.dependencyinjection
 
 import android.content.Context
 import com.autotoll.ffts.model.constant.IConstants
 import com.example.aslcodingtestproject.converter.EnumConverterFactory
-import com.example.aslcodingtestproject.model.database.dao.PhotoDetailDao
 import com.example.aslcodingtestproject.model.database.room.AppDatabase
 import com.example.aslcodingtestproject.model.remote.interceptor.MyOkHttpClient
 import com.example.aslcodingtestproject.model.remote.service.NonTokenService
@@ -30,6 +29,7 @@ import javax.inject.Singleton
 object AppModule {
 
     /*  Okhttp non Token  */
+    // Build Retrofit
     @Singleton
     @Provides
     @Named("NonTokenRetrofit")
@@ -48,6 +48,7 @@ object AppModule {
         .addConverterFactory(EnumConverterFactory())
         .build()
 
+    // Use retrofit
     @Singleton
     @Provides
     fun getNonTokenService(@Named("NonTokenRetrofit") retrofit: Retrofit): NonTokenService =

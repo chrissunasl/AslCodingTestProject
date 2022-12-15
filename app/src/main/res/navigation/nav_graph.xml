@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/PhotoThumbnailListFragment"
         android:name="com.example.aslcodingtestproject.view.fragment.PhotoThumbnailListFragment"
-        android:label="@string/first_fragment_label"
+        android:label="PhotoThumbnailList"
         tools:layout="@layout/fragment_photo_detail">
 
         <action
@@ -25,7 +25,7 @@
     <fragment
         android:id="@+id/PhotoDetailFragment"
         android:name="com.example.aslcodingtestproject.view.fragment.PhotoDetailFragment"
-        android:label="@string/second_fragment_label"
+        android:label="PhotoDetailList"
         tools:layout="@layout/fragment_photo_thumbnail_list">
 
         <argument
