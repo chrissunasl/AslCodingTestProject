@@ -7,13 +7,13 @@ import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailR
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
 import retrofit2.Response
 
-class FakePhotoRepository: BasePhotoRepository {
+class FakePhotoDetailRepository: BasePhotoDetailRepository {
 
-    private var photos : ArrayList<GetPhotoRespItem> = ArrayList()
+    private var photos : ArrayList<GetPhotoDetailRespItem> = ArrayList()
 
-    val getPhoto: MutableLiveData<ArrayList<GetPhotoRespItem>> = MutableLiveData(photos)
+    val getPhoto: MutableLiveData<ArrayList<GetPhotoDetailRespItem>> = MutableLiveData(photos)
 
-    val dbPhoto : LiveData<MutableList<GetPhotoRespItem>> = MutableLiveData(photos)
+    val dbPhoto : LiveData<MutableList<GetPhotoDetailRespItem>> = MutableLiveData(photos)
 
 
     private var shouldReturnNetworkError = false
@@ -26,25 +26,26 @@ class FakePhotoRepository: BasePhotoRepository {
         getPhoto.postValue(photos)
     }
 
-    override suspend fun insertPhoto(photoList: ArrayList<GetPhotoRespItem>){
+    override suspend fun insertPhotoDetail(photoList: ArrayList<GetPhotoDetailRespItem>){
         photos = photoList
         refreshLiveData()
     }
 
-    override fun getPhotoFromDb(): LiveData<MutableList<GetPhotoRespItem>> {
+    override fun getPhotoDetailFromDb(): LiveData<MutableList<GetPhotoDetailRespItem>> {
         return dbPhoto
     }
 
-    override suspend fun getPhotoFromApi(): Resource<ArrayList<GetPhotoRespItem>>{
+    override suspend fun getPhotoDetailFromApi(id: String): Resource<ArrayList<GetPhotoDetailRespItem>>{
         return if(shouldReturnNetworkError){
             Resource.error("Error", null)
         }else{
-            val photoList : ArrayList<GetPhotoRespItem> = ArrayList()
-            val photoItem1 = GetPhotoRespItem(
-                1, 1,
+            val photoList : ArrayList<GetPhotoDetailRespItem> = ArrayList()
+            val photoItem1 = GetPhotoDetailRespItem(
                 "accusamus beatae ad facilis cum similique qui sunt",
                 "https://via.placeholder.com/600/92c952",
-                "https://via.placeholder.com/150/92c952")
+                1,
+                "https://via.placeholder.com/150/92c952",1,
+            )
 
             photoList.add(photoItem1)
             Resource.success(photoList)

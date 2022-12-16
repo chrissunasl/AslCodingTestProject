@@ -5,23 +5,10 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Filterable
-import androidx.core.net.toUri
-import androidx.recyclerview.widget.AsyncDifferConfig
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.aslcodingtestproject.constant.util.OnCustomItemClickListener
 import com.example.aslcodingtestproject.databinding.ItemPhotoHolderCommentsBinding
-import com.example.aslcodingtestproject.databinding.ItemPhotoHolderThumbnailBinding
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailRespItem
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespX
-import java.util.ArrayList
-import java.util.concurrent.Executors
-import kotlin.math.roundToInt
 
 //Cus adapter for comment
 
@@ -30,10 +17,10 @@ class PhotoCommentAdapter(
     private val onCustomItemClickListener: OnCustomItemClickListener<GetPhotoDetailRespItem>
 ) : RecyclerView.Adapter<PhotoCommentAdapter.ItemViewHolder>() {
 
-    var dataList: MutableList<GetPhotoDetailRespItem> = ArrayList()
+    var dataList: ArrayList<GetPhotoDetailRespItem> = ArrayList()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addList(list: MutableList<GetPhotoDetailRespItem>) {
+    fun addList(list: ArrayList<GetPhotoDetailRespItem>) {
         this.dataList = list
         Log.d("chris", "addList, list: ${this.dataList.toString()}")
         notifyDataSetChanged()

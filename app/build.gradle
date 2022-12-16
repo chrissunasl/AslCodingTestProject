@@ -210,5 +210,6 @@ dependencies {
     testImplementation "org.robolectric:robolectric:4.4"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
     testImplementation "org.mockito:mockito-core:2.21.0"
-
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.44'
+    debugImplementation "androidx.fragment:fragment-testing:1.6.0-alpha04"
 }

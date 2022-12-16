@@ -12,11 +12,15 @@ import androidx.fragment.app.viewModels
 import com.example.aslcodingtestproject.constant.util.OnCustomItemClickListener
 import com.example.aslcodingtestproject.view.viewmanager.ImageHandler
 import com.example.aslcodingtestproject.databinding.FragmentPhotoDetailBinding
+import com.example.aslcodingtestproject.model.remote.CheckInternet
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailRespItem
 import com.example.aslcodingtestproject.view.adapter.PhotoCommentAdapter
 import com.example.aslcodingtestproject.view.event.OnLoadingEventListener
 import com.example.aslcodingtestproject.viewmodel.PhotoViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 //
 @AndroidEntryPoint
@@ -41,8 +45,8 @@ class PhotoDetailFragment : Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
         _binding = FragmentPhotoDetailBinding.inflate(inflater, container, false)
@@ -81,24 +85,33 @@ class PhotoDetailFragment : Fragment() {
 
 
         binding.llRefresh.setOnRefreshListener {
-            getPhotoFromApi()
+            getPhotoDetailFromApi()
         }
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun viewModelInit() {
+        // Directly observe database data
+        photoViewModel.photoComment.observe(viewLifecycleOwner) { data ->
+            Log.d("chris", "photoViewModel.photo.observe(this), data: $data")
+            if (data != null) {
 
-        photoViewModel.getPhotoDetailFromDb().observe(viewLifecycleOwner) { data ->
-            Log.d("chris", "viewModelInit() data: $data")
+                val firstTwentyList : ArrayList<GetPhotoDetailRespItem> = ArrayList()
+                for(i in 0 until 20){
+                    firstTwentyList.add(data[i])
+                }
+                photoCommentAdapter.addList(firstTwentyList)
+            }
 
-            photoCommentAdapter.addList(data)
             photoCommentAdapter.notifyDataSetChanged()
 
         }
     }
 
-    private fun getPhotoFromApi(){
-        photoViewModel.getPhotoDetailFromApi(viewLifecycleOwner,
+    private fun getPhotoDetailFromApi() {
+
+        photoViewModel.getPhotoDetailFromApi(args.photoItem.id.toString(),
             onLoadingListener = object : OnLoadingEventListener {
                 override fun startLoading() {
                     binding.llRefresh.isRefreshing = true
@@ -108,16 +121,13 @@ class PhotoDetailFragment : Fragment() {
                     Log.d("chris", "stopLoading(): $this.photo")
                     binding.llRefresh.isRefreshing = false
                 }
-            }, args.photoItem.id.toString())
-    }
+            })
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+
     }
 
     override fun onResume() {
         super.onResume()
-        getPhotoFromApi()
+        getPhotoDetailFromApi()
     }
 }

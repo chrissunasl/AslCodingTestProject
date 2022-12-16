@@ -143,22 +143,19 @@ class PhotoThumbnailListFragment : Fragment() {
     }
 
     private fun getPhotoFromApi(){
-        photoViewModel.getPhotoFromApi(viewLifecycleOwner,
-            onLoadingListener = object : OnLoadingEventListener {
-                override fun startLoading() {
-                    binding.llRefresh.isRefreshing = true
-                }
+        GlobalScope.launch(Dispatchers.IO) {
+            photoViewModel.getPhotoFromApi(
+                onLoadingListener = object : OnLoadingEventListener {
+                    override fun startLoading() {
+                        binding.llRefresh.isRefreshing = true
+                    }
 
-                override fun stopLoading() {
-                    Log.d("chris", "stopLoading(): $this.photo")
-                    binding.llRefresh.isRefreshing = false
-                }
-            })
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+                    override fun stopLoading() {
+                        Log.d("chris", "stopLoading(): $this.photo")
+                        binding.llRefresh.isRefreshing = false
+                    }
+                })
+        }
     }
 
     override fun onResume() {

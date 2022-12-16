@@ -12,7 +12,7 @@ interface PhotoDetailDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPhotoDetail(getPhotoRespItem: ArrayList<GetPhotoDetailRespItem>)
 
-    @Query("SELECT * FROM GetPhotoDetailRespItem ORDER BY id ASC LIMIT 20")
+    @Query("SELECT * FROM GetPhotoDetailRespItem ORDER BY id ASC LIMIT 20  ")
     fun queryPhotoDetailList(): LiveData<MutableList<GetPhotoDetailRespItem>>
 
     @Query("DELETE FROM GetPhotoDetailRespItem")

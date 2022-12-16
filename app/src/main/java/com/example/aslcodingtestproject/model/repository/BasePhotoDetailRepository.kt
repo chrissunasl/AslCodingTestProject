@@ -1,18 +1,17 @@
 package com.example.aslcodingtestproject.model.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.aslcodingtestproject.model.remote.Resource
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailRespItem
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
 
 // interface
-interface BasePhotoRepository {
+interface BasePhotoDetailRepository {
 
-    suspend fun insertPhoto(photoList: ArrayList<GetPhotoRespItem>)
+    suspend fun insertPhotoDetail(photoDetailList: ArrayList<GetPhotoDetailRespItem>)
 
-    fun getPhotoFromDb() : LiveData<MutableList<GetPhotoRespItem>>
+    fun getPhotoDetailFromDb() : LiveData<MutableList<GetPhotoDetailRespItem>>
 
-    suspend fun getPhotoFromApi():  Resource<ArrayList<GetPhotoRespItem>>
+    suspend fun getPhotoDetailFromApi(id: String):  Resource<ArrayList<GetPhotoDetailRespItem>>
 
 }
