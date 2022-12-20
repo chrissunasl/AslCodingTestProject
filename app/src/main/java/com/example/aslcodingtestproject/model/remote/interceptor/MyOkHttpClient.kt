@@ -4,7 +4,6 @@ import android.content.Context
 import com.autotoll.ffts.model.constant.IConstants
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Authenticator
-import okhttp3.Cache
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 

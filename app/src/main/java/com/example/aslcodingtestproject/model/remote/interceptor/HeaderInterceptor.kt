@@ -30,7 +30,6 @@ object HeaderInterceptor {
                 builder.headers(original.headers)
 
                 builder.header("lang", "en")
-//                builder.addHeader("Connection", "keep-alive")
 
                 // Setup method, body
                 builder.method(original.method, original.body)

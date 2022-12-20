@@ -59,24 +59,18 @@ kapt {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
-
+    // Material Style view
+    implementation 'com.google.android.material:material:1.7.0'
 
     // Kotlin coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
 
     // AndroidX Core
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation "androidx.core:core-splashscreen:1.0.0"
-
     implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation "androidx.compose.material3:material3:1.1.0-alpha02"
+    implementation "androidx.compose.material3:material3:1.1.0-alpha03"
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Android navigation
@@ -86,9 +80,6 @@ dependencies {
     // Http okhttp
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.8'
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.8'
-    // Android 5.0+
-    implementation 'org.conscrypt:conscrypt-android:2.5.2'
-
 
     // Http Request, retrofit2
     implementation 'com.google.code.gson:gson:2.9.0'
@@ -117,41 +108,20 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:30.1.0')
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
-//    implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-messaging-ktx'
-
-    // Paging
-    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
-
-    // Image loader
-    implementation 'com.github.bumptech.glide:glide:4.13.2'
-    implementation 'com.github.bumptech.glide:annotations:4.13.2'
-    implementation "com.github.bumptech.glide:okhttp3-integration:4.11.0"
-    kapt 'com.github.bumptech.glide:compiler:4.13.2'
 
     // Logger
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
-    // File Downloader
-    implementation 'com.mindorks.android:prdownloader:0.6.0'
-
     // Animation JSON
     implementation 'com.airbnb.android:lottie:5.2.0'
 
-    // OTP View
-    implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.2'
-
-    // QR CODE
+    // Color
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+
+    // enable core library desugaring
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.8'
-
-    implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01'
-    implementation 'me.relex:circleindicator:2.1.6'
-
-    /* Root Checking Tools */
-    implementation 'com.scottyab:rootbeer-lib:0.1.0'
-    implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha04'
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
@@ -163,27 +133,12 @@ dependencies {
     implementation "com.mikepenz:fastadapter-extensions-drag:${latestFastAdapterRelease}"
     // drag support
     implementation "com.mikepenz:fastadapter-extensions-utils:${latestFastAdapterRelease}"
-    // needs the `expandable`, `drag` and `scroll` extension.
-
-    // Calendar View
-    implementation 'com.github.kizitonwose:CalendarView:1.0.4'
-
-    // SVG support
-    implementation 'com.caverock:androidsvg-aar:1.4'
-
-    // Sound player
-    implementation 'com.google.android.exoplayer:exoplayer-core:2.18.1'
-    implementation 'com.google.android.exoplayer:exoplayer-dash:2.18.1'
-    implementation 'com.google.android.exoplayer:exoplayer-ui:2.18.1'
-
-    // Indicator for tab button
-    implementation 'io.github.vejei.viewpagerindicator:viewpagerindicator:1.0.0-alpha.1'
 
     // Coil
     implementation "io.coil-kt:coil:2.2.2"
 
     // Moshi
-    implementation 'com.squareup.moshi:moshi-kotlin:1.9.3'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.12.0'
 
     // Instrumented Unit Test
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
@@ -202,14 +157,5 @@ dependencies {
 
     // Local Unit Test
     implementation "androidx.test:core:1.5.0"
-    testImplementation "com.google.truth:truth:1.1.3"
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testImplementation "org.hamcrest:hamcrest-all:1.3"
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
-    testImplementation "org.robolectric:robolectric:4.4"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
-    testImplementation "org.mockito:mockito-core:2.21.0"
-    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.44'
-    debugImplementation "androidx.fragment:fragment-testing:1.6.0-alpha04"
+
 }

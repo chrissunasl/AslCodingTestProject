@@ -67,11 +67,6 @@ class PhotoThumbnailListFragment : Fragment() {
                     val args : Bundle = Bundle()
                     args.putParcelable("photoItem", item)
 
-//                    findNavController().navigate(
-//                        PhotoThumbnailListFragmentDirections.actionPhotoThumbnailListFragmentToPhotoDetailFragment(
-//                            item
-//                        )
-//                    )
                     findNavController().navigate(
                         resId = R.id.actionPhotoThumbnailListFragmentToPhotoDetailFragment,
                         args = args,
