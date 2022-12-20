@@ -8,11 +8,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
 import com.example.aslcodingtestproject.R
 import com.example.aslcodingtestproject.databinding.ActivityMainBinding
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespX
-import com.example.aslcodingtestproject.viewmodel.PhotoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

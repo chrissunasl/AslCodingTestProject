@@ -50,15 +50,6 @@ class PhotoCommentAdapter(
 
         fun bind(item: GetPhotoDetailRespItem, position: Int) {
             Log.d("chris", "bind item: ${item}")
-//            Glide.with(act.applicationContext)
-//                .asBitmap()
-//                .load(item.thumbnailUrl)
-//                .optionalFitCenter()
-//                .into(binding.ivPhoto)
-
-
-
-            //binding.tvTitle.text = item.title
             binding.tvComment.text = "Comment: " + item.id
             binding.tvCommentDetail.text = item.body
             binding.cvPhoto.setOnClickListener {

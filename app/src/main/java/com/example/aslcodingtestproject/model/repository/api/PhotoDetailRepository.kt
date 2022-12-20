@@ -4,16 +4,13 @@ import androidx.lifecycle.LiveData
 import com.autotoll.ffts.model.constant.IConstants
 import com.example.aslcodingtestproject.model.database.dao.PhotoDetailDao
 import com.example.aslcodingtestproject.model.remote.Resource
-import com.example.aslcodingtestproject.model.remote.performNonTokenGetOperation
 import com.example.aslcodingtestproject.model.remote.performNonTokenNormalGetOperation
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailRespItem
 import com.example.aslcodingtestproject.model.remote.service.NonTokenService
 import com.example.aslcodingtestproject.model.repository.BasePhotoDetailRepository
-import com.example.aslcodingtestproject.model.repository.BasePhotoRepository
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 // get data
 class PhotoDetailRepository @Inject constructor(

@@ -4,23 +4,19 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.aslcodingtestproject.constant.util.OnCustomItemClickListener
-import com.example.aslcodingtestproject.view.viewmanager.ImageHandler
 import com.example.aslcodingtestproject.databinding.FragmentPhotoDetailBinding
-import com.example.aslcodingtestproject.model.remote.CheckInternet
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailRespItem
 import com.example.aslcodingtestproject.view.adapter.PhotoCommentAdapter
 import com.example.aslcodingtestproject.view.event.OnLoadingEventListener
+import com.example.aslcodingtestproject.view.viewmanager.ImageHandler
 import com.example.aslcodingtestproject.viewmodel.PhotoViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 //
 @AndroidEntryPoint
@@ -96,12 +92,7 @@ class PhotoDetailFragment : Fragment() {
         photoViewModel.photoComment.observe(viewLifecycleOwner) { data ->
             Log.d("chris", "photoViewModel.photo.observe(this), data: $data")
             if (data != null) {
-
-                val firstTwentyList : ArrayList<GetPhotoDetailRespItem> = ArrayList()
-                for(i in 0 until 20){
-                    firstTwentyList.add(data[i])
-                }
-                photoCommentAdapter.addList(firstTwentyList)
+                photoCommentAdapter.addList((0 until 20).map {data[it]}.toCollection(ArrayList()))
             }
 
             photoCommentAdapter.notifyDataSetChanged()

@@ -1,9 +1,9 @@
 package com.example.aslcodingtestproject.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.aslcodingtestproject.model.remote.Resource
-
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailRespItem
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
 import com.example.aslcodingtestproject.model.repository.api.PhotoDetailRepository
@@ -13,7 +13,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 // Photo Related viewModel
 @HiltViewModel
@@ -46,7 +45,6 @@ class PhotoViewModel @Inject constructor(
                 onLoadingListener.stopLoading()
             }
         }
-        //photo.postValue(photoRepository.getPhotoFromApi().data)
     }
 
     fun getPhotoDetailFromApi(id: String, onLoadingListener: OnLoadingEventListener) = viewModelScope.launch {

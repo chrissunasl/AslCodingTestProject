@@ -3,14 +3,9 @@ package com.example.aslcodingtestproject
 
 import android.app.Application
 import android.os.Build
-
 import com.example.aslcodingtestproject.constant.util.DpiHelper
-
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
-import java.security.NoSuchAlgorithmException
-import javax.net.ssl.SSLContext
-import javax.net.ssl.SSLParameters
 
 // Application for Dagger Hilt
 @HiltAndroidApp
