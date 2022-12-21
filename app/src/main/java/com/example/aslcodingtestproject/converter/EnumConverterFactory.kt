@@ -21,7 +21,6 @@ class EnumConverterFactory : Converter.Factory() {
         } catch (exception: NoSuchFieldException) {
             exception.printStackTrace()
         }
-
         return ""
     }
 }

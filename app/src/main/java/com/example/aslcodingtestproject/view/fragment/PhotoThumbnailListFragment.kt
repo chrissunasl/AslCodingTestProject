@@ -42,24 +42,18 @@ class PhotoThumbnailListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentPhotoThumbnailListBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        Timber.i("onViewCreated")
-
         init()
         viewModelInit()
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun init() {
-
         photoListAdapter = PhotoListAdapter(requireActivity(),
             onCustomItemClickListener = object : OnCustomItemClickListener<GetPhotoRespItem> {
                 override fun onClick(view: View?, item: GetPhotoRespItem) {

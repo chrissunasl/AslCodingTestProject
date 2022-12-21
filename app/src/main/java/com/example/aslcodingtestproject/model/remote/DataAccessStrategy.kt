@@ -15,13 +15,10 @@ suspend fun <A> performNonTokenNormalGetOperation(
 
     return try {
         val response = networkCall.invoke()
-
         // Decrypt Data and update database
         Log.d("chris"," ${response.body()}")
         getCallResult.invoke(response.body())
         Resource.success(response.body())
-
-
     } catch (e: Exception) {
         Timber.e("performBaseGetOperation(), \n$e")
         getCallResult.invoke(null)

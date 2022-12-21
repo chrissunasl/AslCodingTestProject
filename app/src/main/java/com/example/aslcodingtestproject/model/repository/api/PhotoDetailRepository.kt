@@ -1,7 +1,8 @@
 package com.example.aslcodingtestproject.model.repository.api
 
 import androidx.lifecycle.LiveData
-import com.autotoll.ffts.model.constant.IConstants
+import com.example.aslcodingtestproject.constant.IConstants
+
 import com.example.aslcodingtestproject.model.database.dao.PhotoDetailDao
 import com.example.aslcodingtestproject.model.remote.Resource
 import com.example.aslcodingtestproject.model.remote.performNonTokenNormalGetOperation
@@ -30,7 +31,7 @@ class PhotoDetailRepository @Inject constructor(
         return performNonTokenNormalGetOperation(
             networkCall = {
                 val nowDateTime = DateTimeFormatter.ofPattern(
-                    IConstants.BASIC.AsymmetricKeyDateTimeFormat
+                    IConstants.BASIC.ASYMMETRIC_KEY_DATE_TIME_FORMAT
                 ).format(ZonedDateTime.now())
                 apiService.getImgDetail(nowDateTime, id = id)
             },

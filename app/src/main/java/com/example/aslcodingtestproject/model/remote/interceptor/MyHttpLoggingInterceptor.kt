@@ -20,10 +20,7 @@ object MyHttpLoggingInterceptor {
                         .create()
                     val prettyPrintJson = gson.toJson(JsonParser.parseString(message))
 
-
-                    Timber.i(
-                        "===================This is the NetworkResponse json data=================="
-                    )
+                    Timber.i("===================This is the NetworkResponse json data==================")
                     val maxLogSize = 1000
                     for (i in 0..prettyPrintJson.length / maxLogSize) {
                         val start = i * maxLogSize

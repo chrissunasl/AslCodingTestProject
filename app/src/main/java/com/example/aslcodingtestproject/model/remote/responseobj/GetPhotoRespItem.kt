@@ -8,7 +8,6 @@ import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 
 // Get photo list response Item
-
 @Entity
 @Parcelize
 data class GetPhotoRespItem(

@@ -5,7 +5,6 @@ import android.util.DisplayMetrics
 
 // Dpi related obj
 object DpiHelper {
-
     fun getDeviceDensityString(context: Context): String {
         return when (context.resources.displayMetrics.densityDpi) {
             DisplayMetrics.DENSITY_LOW -> "ldpi"
@@ -26,6 +25,4 @@ object DpiHelper {
             else -> ""
         }
     }
-
-
 }

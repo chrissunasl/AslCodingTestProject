@@ -31,7 +31,6 @@ class PhotoViewModel @Inject constructor(
 
     fun getPhotoFromDb() = photoRepository.getPhotoFromDb()
 
-
     fun getPhotoFromApi(onLoadingListener: OnLoadingEventListener)  = viewModelScope.launch{
         when(photoRepository.getPhotoFromApi().status){
             Resource.Status.LOADING -> {onLoadingListener.startLoading()}
@@ -39,7 +38,6 @@ class PhotoViewModel @Inject constructor(
                 photo.postValue(photoRepository.getPhotoFromApi().data)
                 onLoadingListener.stopLoading()
             }
-
             Resource.Status.ERROR -> {
                 photo.postValue(ArrayList())
                 onLoadingListener.stopLoading()
@@ -48,14 +46,12 @@ class PhotoViewModel @Inject constructor(
     }
 
     fun getPhotoDetailFromApi(id: String, onLoadingListener: OnLoadingEventListener) = viewModelScope.launch {
-
         when(photoDetailRepository.getPhotoDetailFromApi(id).status){
             Resource.Status.LOADING -> {onLoadingListener.startLoading()}
             Resource.Status.SUCCESS -> {
                 photoComment.postValue(photoDetailRepository.getPhotoDetailFromApi(id).data)
                 onLoadingListener.stopLoading()
             }
-
             Resource.Status.ERROR -> {
                 photo.postValue(ArrayList())
                 onLoadingListener.stopLoading()

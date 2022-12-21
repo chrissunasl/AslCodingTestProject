@@ -1,7 +1,7 @@
 package com.example.aslcodingtestproject.model.remote.interceptor
 
 import android.content.Context
-import com.autotoll.ffts.model.constant.IConstants
+import com.example.aslcodingtestproject.constant.IConstants
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Authenticator
 import okhttp3.OkHttpClient

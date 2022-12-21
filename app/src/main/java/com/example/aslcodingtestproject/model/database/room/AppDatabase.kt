@@ -12,7 +12,6 @@ import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespIte
 
 // Room Library config
 // Connecting Dao
-
 @Database(
     entities = [
         GetPhotoRespItem::class,
@@ -30,8 +29,7 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var instance: AppDatabase? = null
-
-        private const val DB_Name = "ASLCodingTest"
+        private const val DB_NAME = "ASLCodingTest"
 
         fun getDatabase(context: Context): AppDatabase =
             instance ?: synchronized(this) {
@@ -40,17 +38,13 @@ abstract class AppDatabase : RoomDatabase() {
                 }
             }
 
-
         private fun buildDatabase(appContext: Context): AppDatabase {
-
             return Room.databaseBuilder(
                 appContext,
                 AppDatabase::class.java,
-                DB_Name
+                DB_NAME
             ).fallbackToDestructiveMigration()
                 .build()
-
         }
     }
-
 }

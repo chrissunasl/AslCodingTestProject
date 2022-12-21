@@ -18,13 +18,10 @@ class MainApplication : Application() {
         }
     }
 
-
     override fun onCreate() {
         super.onCreate()
         instance = this
-
         printDPI()
-
         // Print SDK Level
         Timber.i("SDK level: ${Build.VERSION.SDK_INT}")
 

@@ -16,5 +16,4 @@ interface PhotoDao {
 
     @Query("DELETE FROM GetPhotoRespItem")
     fun deleteAll(): Int
-
 }

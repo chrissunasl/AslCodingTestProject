@@ -36,8 +36,7 @@ class PhotoListAdapter(
             ItemPhotoHolderThumbnailBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false
-            )
+                false)
         layoutBinding.lifecycleOwner = lifecycleOwner
         return ItemViewHolder(layoutBinding)
     }
@@ -59,18 +58,12 @@ class PhotoListAdapter(
             Log.d("chris", "bind item: ${item}")
 
             binding.tvTitle.text = item.title
-
             binding.photo = item
             binding.executePendingBindings()
             bindImageWithUrl(binding.ivPhoto, item.thumbnailUrl)
-
-
             binding.cvPhoto.setOnClickListener {
                 onCustomItemClickListener.onClick(it, item)
             }
         }
-
-
     }
-
 }

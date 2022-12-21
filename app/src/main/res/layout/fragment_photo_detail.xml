@@ -64,15 +64,11 @@
                         app:imageUrl="@{photo.url}"
                         tools:src="@drawable/flower"
                         android:layout_gravity="center" />
-
                 </LinearLayout>
-
 
                 <androidx.appcompat.widget.Toolbar
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-
-                    />
+                    android:layout_height="?attr/actionBarSize" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>

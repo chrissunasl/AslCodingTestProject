@@ -7,7 +7,6 @@ import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 
 // Get photo detail list(comment) response Item
-
 @Entity
 @Parcelize
 data class GetPhotoDetailRespItem(

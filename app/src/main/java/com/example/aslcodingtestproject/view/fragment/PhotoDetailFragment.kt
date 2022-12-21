@@ -44,22 +44,18 @@ class PhotoDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentPhotoDetailBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         args = PhotoDetailFragmentArgs.fromBundle(requireArguments())
 
         Log.d("chris", "args.photoItem: ${args.photoItem}")
         initUI()
         initAdapter()
         viewModelInit()
-
     }
 
     private fun initUI() {
@@ -71,15 +67,12 @@ class PhotoDetailFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initAdapter() {
-
         photoCommentAdapter = PhotoCommentAdapter(requireActivity(),
             onCustomItemClickListener = object : OnCustomItemClickListener<GetPhotoDetailRespItem> {
                 override fun onClick(view: View?, item: GetPhotoDetailRespItem) {}
             }
         )
         binding.rvPhotoThumbnail.adapter = photoCommentAdapter
-
-
         binding.llRefresh.setOnRefreshListener {
             getPhotoDetailFromApi()
         }
@@ -94,9 +87,7 @@ class PhotoDetailFragment : Fragment() {
             if (data != null) {
                 photoCommentAdapter.addList((0 until 20).map {data[it]}.toCollection(ArrayList()))
             }
-
             photoCommentAdapter.notifyDataSetChanged()
-
         }
     }
 
@@ -107,14 +98,11 @@ class PhotoDetailFragment : Fragment() {
                 override fun startLoading() {
                     binding.llRefresh.isRefreshing = true
                 }
-
                 override fun stopLoading() {
                     Log.d("chris", "stopLoading(): $this.photo")
                     binding.llRefresh.isRefreshing = false
                 }
             })
-
-
     }
 
     override fun onResume() {

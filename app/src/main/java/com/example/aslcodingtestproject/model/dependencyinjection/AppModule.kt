@@ -1,7 +1,7 @@
 package com.example.aslcodingtestproject.model.dependencyinjection
 
 import android.content.Context
-import com.autotoll.ffts.model.constant.IConstants
+import com.example.aslcodingtestproject.constant.IConstants
 import com.example.aslcodingtestproject.converter.EnumConverterFactory
 import com.example.aslcodingtestproject.model.database.room.AppDatabase
 import com.example.aslcodingtestproject.model.remote.interceptor.MyOkHttpClient
@@ -18,7 +18,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
 
-
 /**
  * Retrofit
  * Seperate to different types of retrofit
@@ -27,7 +26,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
     /*  Okhttp non Token  */
     // Build Retrofit
     @Singleton
