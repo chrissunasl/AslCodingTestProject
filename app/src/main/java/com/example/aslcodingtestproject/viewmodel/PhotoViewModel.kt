@@ -10,6 +10,8 @@ import com.example.aslcodingtestproject.model.repository.api.PhotoDetailReposito
 import com.example.aslcodingtestproject.model.repository.api.PhotoRepository
 import com.example.aslcodingtestproject.view.event.OnLoadingEventListener
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -25,8 +27,9 @@ class PhotoViewModel @Inject constructor(
     val photoComment:  MutableLiveData<ArrayList<GetPhotoDetailRespItem>?> = MutableLiveData()
 
     // photo handle
-    suspend fun savePhotoIntoDatabase(photoList: ArrayList<GetPhotoRespItem>) {
-        photoRepository.insertPhoto(photoList)
+    @OptIn(DelicateCoroutinesApi::class)
+    fun savePhotoIntoDatabase(photoList: ArrayList<GetPhotoRespItem>) = viewModelScope.launch{
+        GlobalScope.launch { photoRepository.insertPhoto(photoList) }.join()
     }
 
     fun getPhotoFromDb() = photoRepository.getPhotoFromDb()
@@ -66,7 +69,7 @@ class PhotoViewModel @Inject constructor(
         val resultList = ArrayList<GetPhotoRespItem>()
         val patter = keyword.uppercase(Locale.getDefault()).toRegex()
         dataList.forEach { data ->
-            if (patter.containsMatchIn(data.title.uppercase(Locale.getDefault()).toString())) {
+            if (patter.containsMatchIn(data.title.uppercase(Locale.getDefault()))) {
                 resultList.add(data)
             }
         }

@@ -4,10 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-
 import com.example.aslcodingtestproject.model.database.dao.PhotoDao
-import com.example.aslcodingtestproject.model.database.dao.PhotoDetailDao
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailRespItem
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
 
 // Room Library config
@@ -15,16 +12,14 @@ import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespIte
 @Database(
     entities = [
         GetPhotoRespItem::class,
-        GetPhotoDetailRespItem::class
     ],
-    version = 15,
+    version = 16,
     exportSchema = false
 )
 
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getPhotoDao(): PhotoDao
-    abstract fun getPhotoDetailDao(): PhotoDetailDao
 
     companion object {
         @Volatile

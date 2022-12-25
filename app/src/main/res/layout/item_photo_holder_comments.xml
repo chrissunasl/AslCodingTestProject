@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvPhoto"
@@ -29,7 +28,7 @@
                 android:padding="15dp"
                 android:textAlignment="center"
                 android:maxLines="2"
-                android:text="Comment"/>
+                android:text="@string/common_comment"/>
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider"
@@ -48,8 +47,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:padding="15dp"
                 android:textAlignment="center"
-                android:maxLength="128"
-                tools:text = "abcdefgaaaaabcdefgaaaaabcdefgaaaaabcdefgaaaaabcdefgaaaaabcdefgaaaaabcdefgaaaaabcdefgaaaaabcdefgaaaaabcdefgaaaaabcdefgaaaaa"/>
+                android:maxLength="128"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

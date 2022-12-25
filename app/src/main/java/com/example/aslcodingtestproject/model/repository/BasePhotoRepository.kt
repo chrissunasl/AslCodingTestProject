@@ -1,9 +1,7 @@
 package com.example.aslcodingtestproject.model.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.aslcodingtestproject.model.remote.Resource
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailRespItem
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
 
 // interface

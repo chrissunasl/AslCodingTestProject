@@ -1,16 +1,12 @@
 package com.example.aslcodingtestproject.model.remote.interceptor
 
-import android.content.Context
 import okhttp3.Interceptor
 import okhttp3.Request
 
 // Header controller
 object HeaderInterceptor {
 
-    fun getHeaderInterceptor(
-        appContext: Context,
-        isNeedAccessToken: Boolean,
-    ): Interceptor {
+    fun getHeaderInterceptor(): Interceptor {
         return Interceptor { chain ->
             val original: Request = chain.request()
 

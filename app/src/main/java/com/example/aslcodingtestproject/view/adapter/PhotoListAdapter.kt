@@ -1,33 +1,27 @@
 package com.example.aslcodingtestproject.view.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aslcodingtestproject.constant.util.OnCustomItemClickListener
-import com.example.aslcodingtestproject.view.viewmanager.ImageHandler.bindImageWithUrl
 import com.example.aslcodingtestproject.databinding.ItemPhotoHolderThumbnailBinding
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
-import kotlin.collections.ArrayList
 
 //Cus adapter for list
 
 class PhotoListAdapter(
-    private val act: Context,
     private val onCustomItemClickListener: OnCustomItemClickListener<GetPhotoRespItem>,
     private val lifecycleOwner: LifecycleOwner
 ) : RecyclerView.Adapter<PhotoListAdapter.ItemViewHolder>() {
 
-    var dataList: ArrayList<GetPhotoRespItem> = ArrayList()
+    private var dataList: ArrayList<GetPhotoRespItem> = ArrayList()
 
     @SuppressLint("NotifyDataSetChanged")
     fun addList(list: ArrayList<GetPhotoRespItem>) {
         this.dataList = list
-        Log.d("chris", "addList, list: ${this.dataList.toString()}")
         notifyDataSetChanged()
     }
 
@@ -42,7 +36,7 @@ class PhotoListAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val data = dataList.get(position)
+        val data = dataList[position]
         ViewCompat.setTransitionName(holder.itemView, dataList[position].id.toString())
         holder.bind(data, position)
     }
@@ -55,12 +49,11 @@ class PhotoListAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: GetPhotoRespItem, position: Int) {
-            Log.d("chris", "bind item: ${item}")
 
             binding.tvTitle.text = item.title
             binding.photo = item
             binding.executePendingBindings()
-            bindImageWithUrl(binding.ivPhoto, item.thumbnailUrl)
+
             binding.cvPhoto.setOnClickListener {
                 onCustomItemClickListener.onClick(it, item)
             }

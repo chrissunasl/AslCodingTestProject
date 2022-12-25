@@ -1,8 +1,6 @@
 package com.example.aslcodingtestproject.model.remote.interceptor
 
-import android.content.Context
 import com.example.aslcodingtestproject.constant.IConstants
-import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Authenticator
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
@@ -11,9 +9,7 @@ import java.util.concurrent.TimeUnit
 object MyOkHttpClient {
 
     fun getOkHttpClient(
-        @ApplicationContext appContext: Context,
         authenticator: Authenticator? = null,
-        isNeedApiAccessToken: Boolean = true,
     ): OkHttpClient {
         val timeoutInSeconds: Long = IConstants.BASIC.BASIC_REQUEST_TIMEOUT
 
@@ -22,7 +18,7 @@ object MyOkHttpClient {
             .readTimeout(timeoutInSeconds, TimeUnit.MILLISECONDS) // socket timeout
             .writeTimeout(timeoutInSeconds, TimeUnit.MILLISECONDS)
             .retryOnConnectionFailure(false)
-            .addInterceptor(HeaderInterceptor.getHeaderInterceptor(appContext, isNeedApiAccessToken))
+            .addInterceptor(HeaderInterceptor.getHeaderInterceptor())
             .addInterceptor(MyHttpLoggingInterceptor.getInstance())
             .cache(null)
 

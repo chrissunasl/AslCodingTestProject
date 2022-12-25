@@ -45,7 +45,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="70dp"
-                        android:text="Comment"
+                        android:text="@string/common_comment"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -61,6 +61,7 @@
                         android:minHeight="150dp"
                         android:transitionName="ivPhotoBig"
                         android:layout_marginBottom="70dp"
+                        android:contentDescription="@string/photo_url_from_api"
                         app:imageUrl="@{photo.url}"
                         tools:src="@drawable/flower"
                         android:layout_gravity="center" />

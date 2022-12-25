@@ -1,6 +1,5 @@
 package com.example.aslcodingtestproject.model.remote
 
-import android.util.Log
 import retrofit2.Response
 import timber.log.Timber
 
@@ -10,13 +9,13 @@ suspend fun <A> performNonTokenNormalGetOperation(
     getCallResult: suspend (A?) -> Unit = {},
 ): Resource<A> {
 
-    Log.d("chris","performBaseGetOperation().start() **********************")
+    Timber.tag("DAS").d("performBaseGetOperation().start() **********************")
     Resource.loading(null)
 
     return try {
         val response = networkCall.invoke()
         // Decrypt Data and update database
-        Log.d("chris"," ${response.body()}")
+        Timber.tag("DAS").d(" %s", response.body())
         getCallResult.invoke(response.body())
         Resource.success(response.body())
     } catch (e: Exception) {

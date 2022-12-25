@@ -1,6 +1,5 @@
 package com.example.aslcodingtestproject.model.repository.api
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.aslcodingtestproject.constant.IConstants
 import com.example.aslcodingtestproject.model.database.dao.PhotoDao
@@ -9,6 +8,7 @@ import com.example.aslcodingtestproject.model.remote.performNonTokenNormalGetOpe
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
 import com.example.aslcodingtestproject.model.remote.service.NonTokenService
 import com.example.aslcodingtestproject.model.repository.BasePhotoRepository
+import timber.log.Timber
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
@@ -20,8 +20,8 @@ class PhotoRepository @Inject constructor(
 ): BasePhotoRepository {
 
     override suspend fun insertPhoto(photoList: ArrayList<GetPhotoRespItem>) {
-        if(photoList.isNotEmpty()){
-            Log.d("chris", "PhotoDatabaseRepository.savePhotoIntoDatabase $photoList")
+        if(photoList.isNotEmpty()) {
+            Timber.tag("chris").d("PhotoDatabaseRepository.savePhotoIntoDatabase $photoList")
             dao.insert(photoList)
         }
     }

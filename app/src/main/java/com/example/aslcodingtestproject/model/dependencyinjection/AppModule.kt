@@ -20,7 +20,7 @@ import javax.inject.Singleton
 
 /**
  * Retrofit
- * Seperate to different types of retrofit
+ * Separate to different types of retrofit
  * Eg: Need Token
  */
 @Module
@@ -31,11 +31,9 @@ object AppModule {
     @Singleton
     @Provides
     @Named("NonTokenRetrofit")
-    fun provideNonTokenRetrofit(
-        @ApplicationContext appContext: Context,
-    ): Retrofit = Retrofit.Builder()
+    fun providePhotoRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl(IConstants.DomainName.API_DOMAIN_JSONPLACEHOLDER)
-        .client(MyOkHttpClient.getOkHttpClient(appContext, null, isNeedApiAccessToken = false))
+        .client(MyOkHttpClient.getOkHttpClient(null))
         .addConverterFactory(
             GsonConverterFactory.create(
                 GsonBuilder()
@@ -61,7 +59,4 @@ object AppModule {
     @Provides
     fun PhotoDao(db: AppDatabase) = db.getPhotoDao()
 
-    @Singleton
-    @Provides
-    fun PhotoDetailDao(db: AppDatabase) = db.getPhotoDetailDao()
 }

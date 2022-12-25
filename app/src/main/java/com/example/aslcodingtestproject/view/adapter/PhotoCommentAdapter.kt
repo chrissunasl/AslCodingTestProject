@@ -2,11 +2,10 @@ package com.example.aslcodingtestproject.view.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.aslcodingtestproject.constant.util.OnCustomItemClickListener
+import com.example.aslcodingtestproject.R
 import com.example.aslcodingtestproject.databinding.ItemPhotoHolderCommentsBinding
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailRespItem
 
@@ -14,7 +13,6 @@ import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailR
 
 class PhotoCommentAdapter(
     private val act: Context,
-    private val onCustomItemClickListener: OnCustomItemClickListener<GetPhotoDetailRespItem>
 ) : RecyclerView.Adapter<PhotoCommentAdapter.ItemViewHolder>() {
 
     var dataList: ArrayList<GetPhotoDetailRespItem> = ArrayList()
@@ -22,7 +20,6 @@ class PhotoCommentAdapter(
     @SuppressLint("NotifyDataSetChanged")
     fun addList(list: ArrayList<GetPhotoDetailRespItem>) {
         this.dataList = list
-        Log.d("chris", "addList, list: ${this.dataList.toString()}")
         notifyDataSetChanged()
     }
 
@@ -49,12 +46,8 @@ class PhotoCommentAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: GetPhotoDetailRespItem, position: Int) {
-            Log.d("chris", "bind item: ${item}")
-            binding.tvComment.text = "Comment: " + item.id
+            binding.tvComment.text =  act.getString(R.string.common_comment_with_colon, item.id.toString())
             binding.tvCommentDetail.text = item.body
-            binding.cvPhoto.setOnClickListener {
-                onCustomItemClickListener.onClick(it, item)
-            }
         }
 
     }

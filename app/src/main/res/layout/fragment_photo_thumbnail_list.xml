@@ -19,14 +19,15 @@
             android:gravity="center_vertical"
             android:paddingHorizontal="16dp"
             app:layout_constraintBottom_toTopOf="@id/llRefresh"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/tvStatus">
 
             <EditText
                 android:id="@+id/etSearch"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@drawable/search_bg"
-                android:hint="Search By Title"
+                android:hint="@string/common_search_by_title"
+                android:autofillHints=""
                 android:imeOptions="actionNext"
                 android:inputType="text"
                 android:maxLines="1"
@@ -37,6 +38,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_alignParentEnd="true"
+                android:contentDescription="@string/common_search_button"
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="16dp"
@@ -69,12 +71,13 @@
         <TextView
             android:id="@+id/tvStatus"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:gravity="center"
-            android:text="Error"
+            android:text="@string/common_no_internet"
+            android:textColor="@color/error"
             android:textSize="16sp"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/searchBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

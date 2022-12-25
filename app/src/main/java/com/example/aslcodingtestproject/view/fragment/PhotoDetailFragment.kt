@@ -3,20 +3,18 @@ package com.example.aslcodingtestproject.view.fragment
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.transition.TransitionInflater
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.aslcodingtestproject.constant.util.OnCustomItemClickListener
 import com.example.aslcodingtestproject.databinding.FragmentPhotoDetailBinding
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailRespItem
 import com.example.aslcodingtestproject.view.adapter.PhotoCommentAdapter
 import com.example.aslcodingtestproject.view.event.OnLoadingEventListener
 import com.example.aslcodingtestproject.view.viewmanager.ImageHandler
 import com.example.aslcodingtestproject.viewmodel.PhotoViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 //
 @AndroidEntryPoint
@@ -43,7 +41,7 @@ class PhotoDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentPhotoDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -52,7 +50,7 @@ class PhotoDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         args = PhotoDetailFragmentArgs.fromBundle(requireArguments())
 
-        Log.d("chris", "args.photoItem: ${args.photoItem}")
+        Timber.tag("chris").d("args.photoItem: %s", args.photoItem)
         initUI()
         initAdapter()
         viewModelInit()
@@ -67,25 +65,20 @@ class PhotoDetailFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initAdapter() {
-        photoCommentAdapter = PhotoCommentAdapter(requireActivity(),
-            onCustomItemClickListener = object : OnCustomItemClickListener<GetPhotoDetailRespItem> {
-                override fun onClick(view: View?, item: GetPhotoDetailRespItem) {}
-            }
-        )
+        photoCommentAdapter = PhotoCommentAdapter(requireActivity())
         binding.rvPhotoThumbnail.adapter = photoCommentAdapter
         binding.llRefresh.setOnRefreshListener {
             getPhotoDetailFromApi()
         }
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun viewModelInit() {
         // Directly observe database data
         photoViewModel.photoComment.observe(viewLifecycleOwner) { data ->
-            Log.d("chris", "photoViewModel.photo.observe(this), data: $data")
+            Timber.tag("fragment").d("photoViewModel.photo.observe(this), data: %s", data)
             if (data != null) {
-                photoCommentAdapter.addList((0 until 20).map {data[it]}.toCollection(ArrayList()))
+                photoCommentAdapter.addList((0 until 20).map { data[it] }.toCollection(ArrayList()))
             }
             photoCommentAdapter.notifyDataSetChanged()
         }
@@ -99,7 +92,7 @@ class PhotoDetailFragment : Fragment() {
                     binding.llRefresh.isRefreshing = true
                 }
                 override fun stopLoading() {
-                    Log.d("chris", "stopLoading(): $this.photo")
+                    Timber.tag("chris").d( "stopLoading()")
                     binding.llRefresh.isRefreshing = false
                 }
             })
