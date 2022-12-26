@@ -3,9 +3,14 @@ package com.example.aslcodingtestproject.model.dependencyinjection
 import android.content.Context
 import com.example.aslcodingtestproject.constant.IConstants
 import com.example.aslcodingtestproject.converter.EnumConverterFactory
+import com.example.aslcodingtestproject.model.database.dao.PhotoDao
 import com.example.aslcodingtestproject.model.database.room.AppDatabase
 import com.example.aslcodingtestproject.model.remote.interceptor.MyOkHttpClient
-import com.example.aslcodingtestproject.model.remote.service.NonTokenService
+import com.example.aslcodingtestproject.model.remote.service.PhotoService
+import com.example.aslcodingtestproject.model.repository.BasePhotoDetailRepository
+import com.example.aslcodingtestproject.model.repository.BasePhotoRepository
+import com.example.aslcodingtestproject.model.repository.api.PhotoDetailRepository
+import com.example.aslcodingtestproject.model.repository.api.PhotoRepository
 import com.google.gson.GsonBuilder
 
 import dagger.Module
@@ -30,7 +35,7 @@ object AppModule {
     // Build Retrofit
     @Singleton
     @Provides
-    @Named("NonTokenRetrofit")
+    @Named("PhotoRetrofit")
     fun providePhotoRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl(IConstants.DomainName.API_DOMAIN_JSONPLACEHOLDER)
         .client(MyOkHttpClient.getOkHttpClient(null))
@@ -47,8 +52,8 @@ object AppModule {
     // Use retrofit
     @Singleton
     @Provides
-    fun getNonTokenService(@Named("NonTokenRetrofit") retrofit: Retrofit): NonTokenService =
-        retrofit.create(NonTokenService::class.java)
+    fun getPhotoService(@Named("PhotoRetrofit") retrofit: Retrofit): PhotoService =
+        retrofit.create(PhotoService::class.java)
 
     @Singleton
     @Provides
@@ -58,5 +63,17 @@ object AppModule {
     @Singleton
     @Provides
     fun PhotoDao(db: AppDatabase) = db.getPhotoDao()
+
+    // Definition of dependency injection binding
+    @Singleton
+    @Provides
+    fun providePhotoRepository(apiService: PhotoService,
+                               dao: PhotoDao
+    ) = PhotoRepository(apiService, dao) as BasePhotoRepository
+
+    @Singleton
+    @Provides
+    fun providePhotoDetailRepository(apiService: PhotoService
+    ) = PhotoDetailRepository(apiService) as BasePhotoDetailRepository
 
 }

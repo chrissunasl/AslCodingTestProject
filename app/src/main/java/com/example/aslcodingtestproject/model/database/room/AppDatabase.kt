@@ -5,15 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.aslcodingtestproject.model.database.dao.PhotoDao
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
+import com.example.aslcodingtestproject.model.database.dataclassobject.PhotoDatabaseItem
 
 // Room Library config
 // Connecting Dao
 @Database(
     entities = [
-        GetPhotoRespItem::class,
+        PhotoDatabaseItem::class,
     ],
-    version = 16,
+    version = 19,
     exportSchema = false
 )
 
@@ -33,9 +33,9 @@ abstract class AppDatabase : RoomDatabase() {
                 }
             }
 
-        private fun buildDatabase(appContext: Context): AppDatabase {
+        private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(
-                appContext,
+                context,
                 AppDatabase::class.java,
                 DB_NAME
             ).fallbackToDestructiveMigration()

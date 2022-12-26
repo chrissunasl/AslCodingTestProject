@@ -15,10 +15,10 @@ class PhotoCommentAdapter(
     private val act: Context,
 ) : RecyclerView.Adapter<PhotoCommentAdapter.ItemViewHolder>() {
 
-    var dataList: ArrayList<GetPhotoDetailRespItem> = ArrayList()
+    private var dataList: ArrayList<GetPhotoDetailRespItem> = ArrayList()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addList(list: ArrayList<GetPhotoDetailRespItem>) {
+    fun setData(list: ArrayList<GetPhotoDetailRespItem>) {
         this.dataList = list
         notifyDataSetChanged()
     }
@@ -46,8 +46,9 @@ class PhotoCommentAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: GetPhotoDetailRespItem, position: Int) {
-            binding.tvComment.text =  act.getString(R.string.common_comment_with_colon, item.id.toString())
-            binding.tvCommentDetail.text = item.body
+            binding.tvComment.text =  act.getString(R.string.common_comment_with_colon, (position+1).toString())
+            binding.photoDetail = item
+            binding.executePendingBindings()
         }
 
     }

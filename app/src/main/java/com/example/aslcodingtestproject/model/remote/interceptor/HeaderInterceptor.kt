@@ -2,6 +2,7 @@ package com.example.aslcodingtestproject.model.remote.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Request
+import java.time.LocalDateTime
 
 // Header controller
 object HeaderInterceptor {
@@ -15,6 +16,7 @@ object HeaderInterceptor {
             builder.header("Content-Type", "application/json")
             builder.headers(original.headers)
             builder.header("lang", "en")
+            builder.header("timestamp", LocalDateTime.now().toString())
 
             // Setup method, body
             builder.method(original.method, original.body)

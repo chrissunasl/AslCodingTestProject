@@ -4,7 +4,7 @@ import retrofit2.Response
 import timber.log.Timber
 
 // Directly return Resource
-suspend fun <A> performNonTokenNormalGetOperation(
+suspend fun <A> performPhotoOperation(
     networkCall: suspend () -> Response<A>,
     getCallResult: suspend (A?) -> Unit = {},
 ): Resource<A> {

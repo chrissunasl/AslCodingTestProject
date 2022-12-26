@@ -3,6 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="photoDetail"
+            type="com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailRespItem" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cvPhoto"
         android:layout_width="match_parent"
@@ -45,6 +51,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:imageTitle="@{photoDetail.body}"
                 android:padding="15dp"
                 android:textAlignment="center"
                 android:maxLength="128"/>

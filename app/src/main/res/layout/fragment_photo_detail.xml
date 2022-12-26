@@ -49,6 +49,7 @@
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
+                        app:imageTitle="@{photo.title}"
                         app:layout_constraintBottom_toTopOf="@id/ivPhoto"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,7 +64,6 @@
                         android:layout_marginBottom="70dp"
                         android:contentDescription="@string/photo_url_from_api"
                         app:imageUrl="@{photo.url}"
-                        tools:src="@drawable/flower"
                         android:layout_gravity="center" />
                 </LinearLayout>
 

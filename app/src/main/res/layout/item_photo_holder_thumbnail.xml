@@ -53,6 +53,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:imageTitle="@{photo.title}"
                 android:padding="15dp"
                 android:textAlignment="center"
                 android:maxLines="3"/>

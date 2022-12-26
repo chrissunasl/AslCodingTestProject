@@ -7,15 +7,18 @@ import java.lang.reflect.Type
 
 // Retrofit enum provider
 class EnumConverterFactory : Converter.Factory() {
-    override fun stringConverter(type: Type?, annotations: Array<out Annotation>?,
-                                 retrofit: Retrofit?): Converter<*, String>? {
+    override fun stringConverter(
+        type: Type,
+        annotations: Array<out Annotation>,
+        retrofit: Retrofit
+    ): Converter<*, String>? {
         if (type is Class<*> && type.isEnum) {
             return Converter<Any?, String> { value -> getSerializedNameValue(value as Enum<*>) }
         }
         return null
     }
 
-    fun <E : Enum<*>> getSerializedNameValue(e: E): String {
+    private fun <E : Enum<*>> getSerializedNameValue(e: E): String {
         try {
             return e.javaClass.getField(e.name).getAnnotation(SerializedName::class.java)?.value?:""
         } catch (exception: NoSuchFieldException) {

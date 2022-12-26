@@ -103,10 +103,10 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    // Logger
+    // Logger - 1. security, avoid reverse-engineer. 2. Performance(sometimes needs concatenation when print log)
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
-    // enable core library desugaring
+    // Avoiding app crashes and to support the new features from API level 26 into API level 23(if no need support < 26, it can be ignore
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.8'
 
     // Refresh Layout
@@ -121,7 +121,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     androidTestImplementation "junit:junit:4.13.2"
-    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:2.12.1"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'

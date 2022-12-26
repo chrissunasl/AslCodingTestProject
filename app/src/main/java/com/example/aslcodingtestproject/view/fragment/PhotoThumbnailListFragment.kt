@@ -31,7 +31,7 @@ class PhotoThumbnailListFragment : Fragment() {
     private val photoViewModel: PhotoViewModel by viewModels()
     private val binding get() = _binding!!
     private lateinit var photoListAdapter: PhotoListAdapter
-    private var photoDataList: ArrayList<GetPhotoRespItem>? = ArrayList()
+    private var photoDataList: ArrayList<GetPhotoRespItem> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,8 +63,7 @@ class PhotoThumbnailListFragment : Fragment() {
                         navigatorExtras = extras
                     )
                 }
-            },
-            viewLifecycleOwner
+            }
         )
         binding.rvPhotoThumbnail.adapter = photoListAdapter
 
@@ -73,22 +72,22 @@ class PhotoThumbnailListFragment : Fragment() {
         }
 
         binding.ivSearch.setOnClickListener {
-            val index = photoDataList?.indexOf(
-                photoViewModel.search(
-                    binding.etSearch.text.toString(),
-                    photoDataList!!
-                )[0]
-            )
-            if (index != null) {
-                binding.rvPhotoThumbnail.scrollToPosition(index)
+            if (binding.etSearch.text.toString().isNotEmpty() && photoDataList.isNotEmpty()) {
+                binding.rvPhotoThumbnail.scrollToPosition(
+                    photoViewModel.findPositionByTitle(
+                        binding.etSearch.text.toString(),
+                        photoDataList
+                    )
+                )
+
             }
         }
     }
 
     private fun viewModelInit() {
         // Directly observe database data
-        photoViewModel.photo.observe(viewLifecycleOwner) { data ->
-            Timber.tag("chris").d("photoViewModel.photo, data: %s", data)
+        photoViewModel.photos.observe(viewLifecycleOwner) { data ->
+            Timber.tag("PhotoFragment").d("photoViewModel.photo, data: %s", data)
             if (data.isNullOrEmpty()) {
                 binding.tvStatus.visibility = View.VISIBLE
                 binding.tvStatus.text = getString(R.string.common_no_record)
@@ -101,7 +100,6 @@ class PhotoThumbnailListFragment : Fragment() {
             } else {
                 binding.tvStatus.visibility = View.GONE
                 updateUI(data)
-                photoViewModel.savePhotoIntoDatabase(data)
 
             }
 
@@ -110,24 +108,21 @@ class PhotoThumbnailListFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun updateUI(data: ArrayList<GetPhotoRespItem>) {
-        Timber.tag("chris").d("updateUI: %s", data)
-        data.sortWith { p1, p2 -> p1.title.compareTo(p2.title) }
+        Timber.tag("photoListFragment").d("updateUI: %s", data)
         if (data.isNotEmpty()) {
             photoDataList = data
-            photoListAdapter.addList(data)
-            photoListAdapter.notifyDataSetChanged()
+            photoListAdapter.setData(data)
         }
     }
 
     private fun getDataFromDatabase() {
         photoViewModel.getPhotoFromDb().observe(viewLifecycleOwner) {
-
                 data ->
-            val list: ArrayList<GetPhotoRespItem> = ArrayList()
-            data.forEach {
-                list.add(it)
-            }
-            updateUI(list)
+//            val list: ArrayList<GetPhotoRespItem> = ArrayList()
+//            data.forEach {
+//                list.add(it)
+//            }
+//            updateUI(list)
         }
     }
 
@@ -140,7 +135,7 @@ class PhotoThumbnailListFragment : Fragment() {
                 }
 
                 override fun stopLoading() {
-                    Timber.tag("chris").d("stopLoading()")
+                    Timber.tag("photoListFragment").d("stopLoading()")
                     binding.llRefresh.isRefreshing = false
                 }
             })
