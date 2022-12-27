@@ -1,16 +1,16 @@
-package com.example.aslcodingtestproject.model.remote.responseobj
+package com.example.aslcodingtestproject.view.viewdata
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
 // Get photo list response Item
 @Parcelize
-data class GetPhotoRespItem(
-    val albumId: Int,
+data class PhotoItem(
     val id: Int,
     val thumbnailUrl: String = "",
     val title: String = "",
     val url: String = ""
-): Parcelable
+): Serializable, Parcelable
 
 

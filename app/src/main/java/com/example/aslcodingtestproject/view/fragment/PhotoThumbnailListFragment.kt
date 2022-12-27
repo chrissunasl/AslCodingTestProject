@@ -1,6 +1,5 @@
 package com.example.aslcodingtestproject.view.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +15,7 @@ import com.example.aslcodingtestproject.model.remote.CheckInternet
 import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
 import com.example.aslcodingtestproject.view.adapter.PhotoListAdapter
 import com.example.aslcodingtestproject.view.event.OnLoadingEventListener
+import com.example.aslcodingtestproject.view.viewdata.PhotoItem
 import com.example.aslcodingtestproject.viewmodel.PhotoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -43,15 +43,16 @@ class PhotoThumbnailListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().setActionBar(binding.toolbar)
         init()
         viewModelInit()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+
     private fun init() {
         photoListAdapter = PhotoListAdapter(
-            onCustomItemClickListener = object : OnCustomItemClickListener<GetPhotoRespItem> {
-                override fun onClick(view: View?, item: GetPhotoRespItem) {
+            onCustomItemClickListener = object : OnCustomItemClickListener<PhotoItem> {
+                override fun onClick(view: View?, item: PhotoItem) {
                     val extras = FragmentNavigatorExtras(view!! to "ivPhotoBig")
                     val args = Bundle()
                     args.putParcelable("photoItem", item)
@@ -94,7 +95,6 @@ class PhotoThumbnailListFragment : Fragment() {
 
                 if (!CheckInternet.isOnline(requireActivity())) {
                     binding.tvStatus.text = getString(R.string.common_no_internet)
-                    getDataFromDatabase()
                 }
 
             } else {
@@ -102,27 +102,26 @@ class PhotoThumbnailListFragment : Fragment() {
                 updateUI(data)
 
             }
-
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    private fun updateUI(data: ArrayList<GetPhotoRespItem>) {
+//    private fun observeDataFromDatabase() {
+//        photoViewModel.observePhotoFromDb().observe(viewLifecycleOwner) {
+//                data ->
+////            val list: ArrayList<GetPhotoRespItem> = ArrayList()
+////            data.forEach {
+////                list.add(it)
+////            }
+////            updateUI(list)
+//        }
+//    }
+
+
+    private fun updateUI(data: List<PhotoItem>) {
         Timber.tag("photoListFragment").d("updateUI: %s", data)
         if (data.isNotEmpty()) {
-            photoDataList = data
-            photoListAdapter.setData(data)
-        }
-    }
-
-    private fun getDataFromDatabase() {
-        photoViewModel.getPhotoFromDb().observe(viewLifecycleOwner) {
-                data ->
-//            val list: ArrayList<GetPhotoRespItem> = ArrayList()
-//            data.forEach {
-//                list.add(it)
-//            }
-//            updateUI(list)
+            //photoDataList = data
+            photoListAdapter.submitList(data)
         }
     }
 

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.aslcodingtestproject.databinding.FragmentPhotoDetailBinding
 import com.example.aslcodingtestproject.view.adapter.PhotoCommentAdapter
@@ -48,7 +49,7 @@ class PhotoDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Timber.tag("photoDetail").d("args.photoItem: %s", args.photoItem)
+        Timber.tag("photoDetail").d("args.photoItem: ${args.photoItem}")
         initUI()
         initAdapter()
         viewModelInit()
@@ -57,6 +58,9 @@ class PhotoDetailFragment : Fragment() {
     private fun initUI() {
         binding.photo = args.photoItem
         binding.executePendingBindings()
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigate(PhotoDetailFragmentDirections.actionPhotoDetailFragmentToPhotoThumbnailListFragment())
+        }
     }
 
     private fun initAdapter() {

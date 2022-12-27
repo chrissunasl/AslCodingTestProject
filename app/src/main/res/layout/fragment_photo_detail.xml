@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="photo"
-            type="com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem" />
+            type="com.example.aslcodingtestproject.view.viewdata.PhotoItem" />
     </data>
+
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -67,9 +67,11 @@
                         android:layout_gravity="center" />
                 </LinearLayout>
 
-                <androidx.appcompat.widget.Toolbar
+                <Toolbar
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize" />
+                    android:layout_height="?attr/actionBarSize"
+                    android:navigationIcon="@drawable/arrow_back"/>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>

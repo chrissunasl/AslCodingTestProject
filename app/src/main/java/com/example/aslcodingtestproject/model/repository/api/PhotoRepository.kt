@@ -1,6 +1,5 @@
 package com.example.aslcodingtestproject.model.repository.api
 
-import androidx.lifecycle.LiveData
 import com.example.aslcodingtestproject.model.database.dao.PhotoDao
 import com.example.aslcodingtestproject.model.database.dataclassobject.PhotoDatabaseItem
 import com.example.aslcodingtestproject.model.remote.Resource
@@ -15,26 +14,24 @@ import javax.inject.Inject
 class PhotoRepository @Inject constructor(
     private val apiService: PhotoService,
     private val dao: PhotoDao
-): BasePhotoRepository {
+) : BasePhotoRepository {
 
-    override suspend fun insertPhoto(photo: PhotoDatabaseItem) {
-            Timber.tag("photoRepository").d("PhotoDatabaseRepository.savePhotoIntoDatabase $photo")
-            dao.insert(photo)
+    override suspend fun insertPhoto(photo: List<PhotoDatabaseItem>) {
+        Timber.tag("photoRepository").d("PhotoDatabaseRepository.savePhotoIntoDatabase")
+        dao.insert(photo)
 
     }
 
     // Repository to separate Dao & viewModel
-    override fun getPhotoFromDb():  LiveData<MutableList<PhotoDatabaseItem>> {
+    override suspend fun getPhotoFromDb(): List<PhotoDatabaseItem> {
+        Timber.tag("getPhotoFromDb").d("getPhotoFromDb()")
         return dao.queryPhotoList()
     }
 
-    override suspend fun getPhotoFromApi():Resource<ArrayList<GetPhotoRespItem>>{
-
-
+    override suspend fun getPhotoFromApi(): Resource<List<GetPhotoRespItem>> {
 
         return performPhotoOperation(
             networkCall = {
-
                 apiService.getImg()
             }
         )

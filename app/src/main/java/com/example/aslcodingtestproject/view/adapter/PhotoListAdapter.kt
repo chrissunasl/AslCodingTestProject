@@ -1,27 +1,20 @@
 package com.example.aslcodingtestproject.view.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aslcodingtestproject.constant.util.OnCustomItemClickListener
 import com.example.aslcodingtestproject.databinding.ItemPhotoHolderThumbnailBinding
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
+import com.example.aslcodingtestproject.view.viewdata.PhotoItem
 
 //Cus adapter for list
 
 class PhotoListAdapter(
-    private val onCustomItemClickListener: OnCustomItemClickListener<GetPhotoRespItem>,
-) : RecyclerView.Adapter<PhotoListAdapter.ItemViewHolder>() {
-
-    private var dataList: ArrayList<GetPhotoRespItem> = ArrayList()
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun setData(list: ArrayList<GetPhotoRespItem>) {
-        this.dataList = list
-        notifyDataSetChanged()
-    }
+    private val onCustomItemClickListener: OnCustomItemClickListener<PhotoItem>,
+) : ListAdapter<PhotoItem, PhotoListAdapter.ItemViewHolder>(PhotoListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val layoutBinding =
@@ -33,19 +26,14 @@ class PhotoListAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val data = dataList[position]
-        ViewCompat.setTransitionName(holder.itemView, dataList[position].id.toString())
-        holder.bind(data, position)
-    }
-
-    override fun getItemCount(): Int {
-        return dataList.size
+        ViewCompat.setTransitionName(holder.itemView, getItem(position).id.toString())
+        holder.bind(getItem(position))
     }
 
     inner class ItemViewHolder(private val binding: ItemPhotoHolderThumbnailBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: GetPhotoRespItem, position: Int) {
+        fun bind(item: PhotoItem) {
 
             binding.photo = item
             binding.executePendingBindings()
@@ -55,4 +43,15 @@ class PhotoListAdapter(
             }
         }
     }
+}
+
+class PhotoListDiffCallback : DiffUtil.ItemCallback<PhotoItem>(){
+    override fun areItemsTheSame(oldItem: PhotoItem, newItem: PhotoItem): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: PhotoItem, newItem: PhotoItem): Boolean {
+        return areItemsTheSame(oldItem, newItem)
+    }
+
 }

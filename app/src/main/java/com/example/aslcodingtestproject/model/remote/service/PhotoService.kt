@@ -9,7 +9,7 @@ import java.util.*
 // service interface support retrofit & okhttp
 interface PhotoService {
     @GET("photos")
-    suspend fun getImg(): Response<ArrayList<GetPhotoRespItem>>
+    suspend fun getImg(): Response<List<GetPhotoRespItem>>
 
     @GET("photos/{id}/comments")
     suspend fun getImgDetail(

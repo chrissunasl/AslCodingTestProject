@@ -6,7 +6,7 @@
     <data>
         <variable
             name="photo"
-            type="com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem" />
+            type="com.example.aslcodingtestproject.view.viewdata.PhotoItem" />
     </data>
 
     <androidx.cardview.widget.CardView

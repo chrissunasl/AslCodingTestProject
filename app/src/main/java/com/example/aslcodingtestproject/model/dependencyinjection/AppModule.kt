@@ -31,14 +31,14 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-    /*  Okhttp non Token  */
+
     // Build Retrofit
     @Singleton
     @Provides
     @Named("PhotoRetrofit")
     fun providePhotoRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl(IConstants.DomainName.API_DOMAIN_JSONPLACEHOLDER)
-        .client(MyOkHttpClient.getOkHttpClient(null))
+        .client(MyOkHttpClient.getOkHttpClient())
         .addConverterFactory(
             GsonConverterFactory.create(
                 GsonBuilder()

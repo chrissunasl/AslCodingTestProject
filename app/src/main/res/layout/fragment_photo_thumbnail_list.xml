@@ -4,12 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.fragment.PhotoDetailFragment">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:theme="@style/Theme.AslCodingTestProject.AppBarOverlay">
+
+            <Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/Theme.AslCodingTestProject.PopupOverlay" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="@string/common_no_internet"
+            android:textColor="@color/error"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/searchBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBar"
+            tools:visibility="visible" />
 
         <RelativeLayout
             android:id="@+id/searchBar"
@@ -68,20 +97,7 @@
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        <TextView
-            android:id="@+id/tvStatus"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:text="@string/common_no_internet"
-            android:textColor="@color/error"
-            android:textSize="16sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/searchBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

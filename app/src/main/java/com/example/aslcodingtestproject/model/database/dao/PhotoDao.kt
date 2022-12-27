@@ -1,6 +1,5 @@
 package com.example.aslcodingtestproject.model.database.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.aslcodingtestproject.model.database.dataclassobject.PhotoDatabaseItem
 
@@ -9,10 +8,10 @@ import com.example.aslcodingtestproject.model.database.dataclassobject.PhotoData
 interface PhotoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(getPhotoRespItem: PhotoDatabaseItem)
+    fun insert(getPhotoRespItem: List<PhotoDatabaseItem>)
 
     @Query("SELECT * FROM PhotoDatabaseItem ORDER BY title ASC")
-    fun queryPhotoList(): LiveData<MutableList<PhotoDatabaseItem>>
+    fun queryPhotoList(): List<PhotoDatabaseItem>
 
     @Query("DELETE FROM PhotoDatabaseItem")
     fun deleteAll(): Int

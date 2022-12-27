@@ -17,7 +17,7 @@
 
             <argument
                 android:name="photoItem"
-                app:argType="com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem"
+                app:argType="com.example.aslcodingtestproject.view.viewdata.PhotoItem"
                 app:nullable="false" />
 
         </action>
@@ -30,7 +30,7 @@
 
         <argument
             android:name="photoItem"
-            app:argType="com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem"
+            app:argType="com.example.aslcodingtestproject.view.viewdata.PhotoItem"
             app:nullable="false" />
 
         <action
