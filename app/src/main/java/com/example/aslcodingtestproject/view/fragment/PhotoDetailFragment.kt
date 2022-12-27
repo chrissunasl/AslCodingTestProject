@@ -10,8 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.aslcodingtestproject.databinding.FragmentPhotoDetailBinding
+import com.example.aslcodingtestproject.model.remote.Resource
 import com.example.aslcodingtestproject.view.adapter.PhotoCommentAdapter
-import com.example.aslcodingtestproject.view.event.OnLoadingEventListener
 import com.example.aslcodingtestproject.viewmodel.PhotoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -77,26 +77,21 @@ class PhotoDetailFragment : Fragment() {
             Timber.tag("fragment").d("photoViewModel.photo.observe(this), data: %s", data)
             if (data != null ) {
                 if(data.count() > 19){
-                    photoCommentAdapter.setData((0 until 20).map { data[it] }.toCollection(ArrayList()))
+                    photoCommentAdapter.submitList((0 until 20).map { data[it]})
                 }else{
-                    photoCommentAdapter.setData(data)
+                    photoCommentAdapter.submitList(data)
                 }
             }
+        }
+        photoViewModel.status.observe(viewLifecycleOwner){
+                status ->
+            binding.llRefresh.isRefreshing = status == Resource.Status.LOADING
         }
     }
 
     private fun getPhotoDetailFromApi() {
 
-        photoViewModel.getPhotoDetailFromApi(args.photoItem.id.toString(),
-            onLoadingListener = object : OnLoadingEventListener {
-                override fun startLoading() {
-                    binding.llRefresh.isRefreshing = true
-                }
-                override fun stopLoading() {
-                    Timber.tag("getPhotoDetailFromApi").d( "stopLoading()")
-                    binding.llRefresh.isRefreshing = false
-                }
-            })
+        photoViewModel.getPhotoDetailFromApi(args.photoItem.id.toString())
     }
 
     override fun onResume() {

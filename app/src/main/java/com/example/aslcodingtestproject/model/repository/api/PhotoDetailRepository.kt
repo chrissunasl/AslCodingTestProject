@@ -12,7 +12,7 @@ class PhotoDetailRepository @Inject constructor(
     private val apiService: PhotoService,
 ): BasePhotoDetailRepository {
 
-    override suspend fun getPhotoDetailFromApi(id: String): Resource<ArrayList<GetPhotoDetailRespItem>> {
+    override suspend fun getPhotoDetailFromApi(id: String): Resource<List<GetPhotoDetailRespItem>> {
         return performPhotoOperation(
             networkCall = {
                 apiService.getImgDetail(id = id)

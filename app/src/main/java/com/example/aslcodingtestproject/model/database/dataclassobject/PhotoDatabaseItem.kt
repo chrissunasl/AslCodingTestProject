@@ -12,8 +12,8 @@ data class PhotoDatabaseItem(
     val title: String = "",
     val url: String = ""
 ){
-    @PrimaryKey(autoGenerate = true)
-    var pId: Int = 0
+    @PrimaryKey(autoGenerate = false)
+    var pId: Int = id
 }
 
 

@@ -8,7 +8,7 @@ import com.example.aslcodingtestproject.model.database.dataclassobject.PhotoData
 interface PhotoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(getPhotoRespItem: List<PhotoDatabaseItem>)
+    fun insert(photoList: List<PhotoDatabaseItem>)
 
     @Query("SELECT * FROM PhotoDatabaseItem ORDER BY title ASC")
     fun queryPhotoList(): List<PhotoDatabaseItem>

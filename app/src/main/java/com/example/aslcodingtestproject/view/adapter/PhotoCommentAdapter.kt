@@ -1,27 +1,20 @@
 package com.example.aslcodingtestproject.view.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aslcodingtestproject.R
 import com.example.aslcodingtestproject.databinding.ItemPhotoHolderCommentsBinding
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailRespItem
+import com.example.aslcodingtestproject.view.viewdata.PhotoDetailItem
 
 //Cus adapter for comment
 
 class PhotoCommentAdapter(
     private val act: Context,
-) : RecyclerView.Adapter<PhotoCommentAdapter.ItemViewHolder>() {
-
-    private var dataList: ArrayList<GetPhotoDetailRespItem> = ArrayList()
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun setData(list: ArrayList<GetPhotoDetailRespItem>) {
-        this.dataList = list
-        notifyDataSetChanged()
-    }
+) : ListAdapter<PhotoDetailItem, PhotoCommentAdapter.ItemViewHolder>(PhotoDetailListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val layoutBinding =
@@ -34,23 +27,29 @@ class PhotoCommentAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val data = dataList[position]
-        holder.bind(data, position)
-    }
-
-    override fun getItemCount(): Int {
-        return dataList.size
+        holder.bind(getItem(position), position)
     }
 
     inner class ItemViewHolder(private val binding: ItemPhotoHolderCommentsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: GetPhotoDetailRespItem, position: Int) {
+        fun bind(item: PhotoDetailItem, position: Int) {
             binding.tvComment.text =  act.getString(R.string.common_comment_with_colon, (position+1).toString())
             binding.photoDetail = item
             binding.executePendingBindings()
         }
 
+    }
+
+}
+
+class PhotoDetailListDiffCallback : DiffUtil.ItemCallback<PhotoDetailItem>(){
+    override fun areItemsTheSame(oldItem: PhotoDetailItem, newItem: PhotoDetailItem): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: PhotoDetailItem, newItem: PhotoDetailItem): Boolean {
+        return areItemsTheSame(oldItem, newItem)
     }
 
 }

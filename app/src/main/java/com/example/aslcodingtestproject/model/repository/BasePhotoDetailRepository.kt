@@ -6,6 +6,6 @@ import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailR
 // interface
 interface BasePhotoDetailRepository {
 
-    suspend fun getPhotoDetailFromApi(id: String):  Resource<ArrayList<GetPhotoDetailRespItem>>
+    suspend fun getPhotoDetailFromApi(id: String):  Resource<List<GetPhotoDetailRespItem>>
 
 }

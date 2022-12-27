@@ -12,14 +12,12 @@ import com.example.aslcodingtestproject.R
 import com.example.aslcodingtestproject.constant.util.OnCustomItemClickListener
 import com.example.aslcodingtestproject.databinding.FragmentPhotoThumbnailListBinding
 import com.example.aslcodingtestproject.model.remote.CheckInternet
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
+import com.example.aslcodingtestproject.model.remote.Resource
 import com.example.aslcodingtestproject.view.adapter.PhotoListAdapter
-import com.example.aslcodingtestproject.view.event.OnLoadingEventListener
 import com.example.aslcodingtestproject.view.viewdata.PhotoItem
 import com.example.aslcodingtestproject.viewmodel.PhotoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import java.util.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -31,7 +29,7 @@ class PhotoThumbnailListFragment : Fragment() {
     private val photoViewModel: PhotoViewModel by viewModels()
     private val binding get() = _binding!!
     private lateinit var photoListAdapter: PhotoListAdapter
-    private var photoDataList: ArrayList<GetPhotoRespItem> = ArrayList()
+    private var photoDataList: List<PhotoItem> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +46,7 @@ class PhotoThumbnailListFragment : Fragment() {
         viewModelInit()
     }
 
-
+    // init of late init adapter, button event
     private fun init() {
         photoListAdapter = PhotoListAdapter(
             onCustomItemClickListener = object : OnCustomItemClickListener<PhotoItem> {
@@ -73,7 +71,7 @@ class PhotoThumbnailListFragment : Fragment() {
         }
 
         binding.ivSearch.setOnClickListener {
-            if (binding.etSearch.text.toString().isNotEmpty() && photoDataList.isNotEmpty()) {
+            if (binding.etSearch.text.toString().isNotEmpty()) {
                 binding.rvPhotoThumbnail.scrollToPosition(
                     photoViewModel.findPositionByTitle(
                         binding.etSearch.text.toString(),
@@ -85,60 +83,34 @@ class PhotoThumbnailListFragment : Fragment() {
         }
     }
 
+    // init of viewModel observe
     private fun viewModelInit() {
-        // Directly observe database data
+        // Directly observe photos, view only observe
         photoViewModel.photos.observe(viewLifecycleOwner) { data ->
-            Timber.tag("PhotoFragment").d("photoViewModel.photo, data: %s", data)
             if (data.isNullOrEmpty()) {
                 binding.tvStatus.visibility = View.VISIBLE
                 binding.tvStatus.text = getString(R.string.common_no_record)
 
+                // Checking Internet needs context
                 if (!CheckInternet.isOnline(requireActivity())) {
                     binding.tvStatus.text = getString(R.string.common_no_internet)
                 }
-
             } else {
+                photoDataList = data
                 binding.tvStatus.visibility = View.GONE
-                updateUI(data)
-
+                photoListAdapter.submitList(data)
             }
         }
-    }
-
-//    private fun observeDataFromDatabase() {
-//        photoViewModel.observePhotoFromDb().observe(viewLifecycleOwner) {
-//                data ->
-////            val list: ArrayList<GetPhotoRespItem> = ArrayList()
-////            data.forEach {
-////                list.add(it)
-////            }
-////            updateUI(list)
-//        }
-//    }
-
-
-    private fun updateUI(data: List<PhotoItem>) {
-        Timber.tag("photoListFragment").d("updateUI: %s", data)
-        if (data.isNotEmpty()) {
-            //photoDataList = data
-            photoListAdapter.submitList(data)
+        // Observe status replace passing loading listener avoid memory leak
+        photoViewModel.status.observe(viewLifecycleOwner){
+            status ->
+            Timber.i("status, $status")
+            binding.llRefresh.isRefreshing = status == Resource.Status.LOADING
         }
     }
 
     private fun getPhotoFromApi() {
-
-        photoViewModel.getPhotoFromApi(
-            onLoadingListener = object : OnLoadingEventListener {
-                override fun startLoading() {
-                    binding.llRefresh.isRefreshing = true
-                }
-
-                override fun stopLoading() {
-                    Timber.tag("photoListFragment").d("stopLoading()")
-                    binding.llRefresh.isRefreshing = false
-                }
-            })
-
+        photoViewModel.getPhotoFromApi()
     }
 
     override fun onResume() {

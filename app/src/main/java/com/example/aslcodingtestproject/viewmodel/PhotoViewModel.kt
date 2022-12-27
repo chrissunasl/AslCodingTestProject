@@ -3,11 +3,9 @@ package com.example.aslcodingtestproject.viewmodel
 import androidx.lifecycle.*
 import com.example.aslcodingtestproject.model.database.dataclassobject.PhotoDatabaseItem
 import com.example.aslcodingtestproject.model.remote.Resource
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoDetailRespItem
-import com.example.aslcodingtestproject.model.remote.responseobj.GetPhotoRespItem
 import com.example.aslcodingtestproject.model.repository.BasePhotoDetailRepository
 import com.example.aslcodingtestproject.model.repository.BasePhotoRepository
-import com.example.aslcodingtestproject.view.event.OnLoadingEventListener
+import com.example.aslcodingtestproject.view.viewdata.PhotoDetailItem
 import com.example.aslcodingtestproject.view.viewdata.PhotoItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -27,12 +25,15 @@ class PhotoViewModel @Inject constructor(
     val photos: LiveData<List<PhotoItem>?> get() = _photos
     private val _photos = MutableLiveData<List<PhotoItem>?>()
 
-    val photoComments: LiveData<ArrayList<GetPhotoDetailRespItem>?> get() = _photoComments
-    private val _photoComments = MutableLiveData<ArrayList<GetPhotoDetailRespItem>?>()
+    val photoComments: LiveData<List<PhotoDetailItem>?> get() = _photoComments
+    private val _photoComments = MutableLiveData<List<PhotoDetailItem>?>()
+
+    val status: LiveData<Resource.Status> get() = _status
+    private val _status = MutableLiveData<Resource.Status>()
 
     // photo handle
     @OptIn(DelicateCoroutinesApi::class)
-    suspend fun savePhotoIntoDatabase(photo: List<PhotoDatabaseItem>) = viewModelScope.launch {
+    fun savePhotoIntoDatabase(photo: List<PhotoDatabaseItem>) = viewModelScope.launch {
         GlobalScope.launch { photoRepository.insertPhoto(photo) }.join()
     }
 
@@ -55,11 +56,12 @@ class PhotoViewModel @Inject constructor(
         }
     }
 
-    fun getPhotoFromApi(onLoadingListener: OnLoadingEventListener) = viewModelScope.launch {
+    fun getPhotoFromApi() = viewModelScope.launch {
         val resp = photoRepository.getPhotoFromApi()
         when (resp.status) {
             Resource.Status.LOADING -> {
-                onLoadingListener.startLoading()
+                _status.postValue(resp.status)
+
             }
             Resource.Status.SUCCESS -> {
 
@@ -75,8 +77,7 @@ class PhotoViewModel @Inject constructor(
                             url = it.url
                         )
                     })
-                    onLoadingListener.stopLoading()
-
+                    _status.postValue(resp.status)
                     savePhotoIntoDatabase(
                         respData.map {
                             PhotoDatabaseItem(
@@ -90,29 +91,37 @@ class PhotoViewModel @Inject constructor(
                     )
 
                 } else {
+                    _status.postValue(resp.status)
                     observePhotoFromDb()
                 }
             }
             Resource.Status.ERROR -> {
+                _status.postValue(resp.status)
                 observePhotoFromDb()
-                onLoadingListener.stopLoading()
             }
         }
     }
 
-    fun getPhotoDetailFromApi(id: String, onLoadingListener: OnLoadingEventListener) =
+    fun getPhotoDetailFromApi(id: String) =
         viewModelScope.launch {
-            when (photoDetailRepository.getPhotoDetailFromApi(id).status) {
+            val resp = photoDetailRepository.getPhotoDetailFromApi(id)
+            when (resp.status) {
                 Resource.Status.LOADING -> {
-                    onLoadingListener.startLoading()
+                    _status.postValue(resp.status)
                 }
                 Resource.Status.SUCCESS -> {
-                    _photoComments.postValue(photoDetailRepository.getPhotoDetailFromApi(id).data)
-                    onLoadingListener.stopLoading()
+                    if (!resp.data.isNullOrEmpty()) {
+                        _photoComments.postValue(resp.data.map {
+                            PhotoDetailItem(
+                                body = it.body,
+                                id = it.id
+                            )
+                        })
+                    }
+                    _status.postValue(resp.status)
                 }
                 Resource.Status.ERROR -> {
-                    _photoComments.postValue(ArrayList())
-                    onLoadingListener.stopLoading()
+                    _status.postValue(resp.status)
                 }
             }
         }
@@ -120,7 +129,7 @@ class PhotoViewModel @Inject constructor(
     // return the first item position of photo list
     fun findPositionByTitle(
         keyword: String,
-        dataList: MutableList<GetPhotoRespItem>
+        dataList: List<PhotoItem>
     ): Int {
         val patter = keyword.uppercase(Locale.getDefault()).toRegex()
         val filteredList = dataList.filter {

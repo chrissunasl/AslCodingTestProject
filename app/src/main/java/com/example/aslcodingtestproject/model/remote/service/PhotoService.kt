@@ -14,5 +14,5 @@ interface PhotoService {
     @GET("photos/{id}/comments")
     suspend fun getImgDetail(
         @Path("id") id: String
-    ): Response<ArrayList<GetPhotoDetailRespItem>>
+    ): Response<List<GetPhotoDetailRespItem>>
 }
