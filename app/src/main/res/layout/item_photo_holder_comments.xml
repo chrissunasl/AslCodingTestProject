@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="photoDetail"
-            type="com.example.aslcodingtestproject.view.viewdata.PhotoDetailItem" />
+            name="photoComment"
+            type="com.example.aslcodingtestproject.presentation.photocomment.PhotoCommentItem" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -51,7 +51,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:imageTitle="@{photoDetail.body}"
+                app:imageTitle="@{photoComment.body}"
                 android:padding="15dp"
                 android:textAlignment="center"
                 android:maxLength="128"/>

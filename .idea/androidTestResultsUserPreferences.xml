@@ -9,6 +9,7 @@
               <option name="preferredColumnWidths">
                 <map>
                   <entry key="Duration" value="90" />
+                  <entry key="Pixel_3a_API_33_x86_64" value="120" />
                   <entry key="R58N91XCV5D" value="120" />
                   <entry key="Tests" value="360" />
                   <entry key="samsung&#10; SM-A515F" value="120" />
@@ -22,10 +23,10 @@
             <AndroidTestResultsTableState>
               <option name="preferredColumnWidths">
                 <map>
-                  <entry key="Duration" value="90" />
-                  <entry key="Pixel_3a_API_33_x86_64" value="120" />
+                  <entry key="Duration" value="121" />
+                  <entry key="Pixel_3a_API_33_x86_64" value="150" />
                   <entry key="R58N91XCV5D" value="120" />
-                  <entry key="Tests" value="360" />
+                  <entry key="Tests" value="391" />
                   <entry key="samsung&#10; SM-A515F" value="120" />
                 </map>
               </option>

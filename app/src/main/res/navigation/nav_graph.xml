@@ -7,34 +7,34 @@
 
     <fragment
         android:id="@+id/PhotoThumbnailListFragment"
-        android:name="com.example.aslcodingtestproject.view.fragment.PhotoThumbnailListFragment"
+        android:name="com.example.aslcodingtestproject.presentation.photos.view.PhotoThumbnailListFragment"
         android:label="PhotoThumbnailList"
-        tools:layout="@layout/fragment_photo_detail">
+        tools:layout="@layout/fragment_photo_comment">
 
         <action
-            android:id="@+id/actionPhotoThumbnailListFragmentToPhotoDetailFragment"
-            app:destination="@id/PhotoDetailFragment">
+            android:id="@+id/actionPhotoThumbnailListFragmentToPhotoCommentFragment"
+            app:destination="@id/PhotoCommentFragment">
 
             <argument
                 android:name="photoItem"
-                app:argType="com.example.aslcodingtestproject.view.viewdata.PhotoItem"
+                app:argType="com.example.aslcodingtestproject.presentation.photos.PhotoItem"
                 app:nullable="false" />
 
         </action>
     </fragment>
     <fragment
-        android:id="@+id/PhotoDetailFragment"
-        android:name="com.example.aslcodingtestproject.view.fragment.PhotoDetailFragment"
-        android:label="PhotoDetailList"
+        android:id="@+id/PhotoCommentFragment"
+        android:name="com.example.aslcodingtestproject.presentation.photocomment.view.PhotoCommentFragment"
+        android:label="PhotoCommentList"
         tools:layout="@layout/fragment_photo_thumbnail_list">
 
         <argument
             android:name="photoItem"
-            app:argType="com.example.aslcodingtestproject.view.viewdata.PhotoItem"
+            app:argType="com.example.aslcodingtestproject.presentation.photos.PhotoItem"
             app:nullable="false" />
 
         <action
-            android:id="@+id/actionPhotoDetailFragmentToPhotoThumbnailListFragment"
+            android:id="@+id/actionPhotoCommentFragmentToPhotoThumbnailListFragment"
             app:destination="@id/PhotoThumbnailListFragment" />
     </fragment>
 </navigation>
