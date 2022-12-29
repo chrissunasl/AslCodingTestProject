@@ -13,9 +13,6 @@ class MainApplication : Application() {
 
     companion object {
         private var instance: MainApplication? = null
-        fun get(): MainApplication? {
-            return instance
-        }
     }
 
     override fun onCreate() {

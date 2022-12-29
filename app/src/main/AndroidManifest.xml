@@ -10,29 +10,23 @@
 
     <application
         android:name=".MainApplication"
-        android:allowBackup="false"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
+        android:allowBackup="true"
         android:icon="@drawable/ic_splash_screen_square"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_splash_screen"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AslCodingTestProject"
+        android:theme="@style/Theme.App.Launch"
         android:usesCleartextTraffic="false"
         tools:targetApi="31">
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true"
-            android:permission=""
-            android:theme="@style/Theme.AslCodingTestProject.NoActionBar">
+            android:theme="@style/Theme.App.Launch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
     </application>
 

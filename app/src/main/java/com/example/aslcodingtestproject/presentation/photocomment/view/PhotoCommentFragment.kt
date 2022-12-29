@@ -16,7 +16,6 @@ import com.example.aslcodingtestproject.presentation.viewmodel.PhotoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
-//
 @AndroidEntryPoint
 class PhotoCommentFragment : Fragment() {
 
