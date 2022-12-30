@@ -3,7 +3,7 @@ package com.example.aslcodingtestproject.data.repository
 import com.example.aslcodingtestproject.data.local.dao.PhotoDao
 import com.example.aslcodingtestproject.data.entities.PhotoDatabaseItem
 import com.example.aslcodingtestproject.common.Resource
-import com.example.aslcodingtestproject.domain.usecase.performPhotoOperation
+import com.example.aslcodingtestproject.domain.performPhotoOperation
 import com.example.aslcodingtestproject.data.remote.resp.PhotoRespItem
 import com.example.aslcodingtestproject.data.remote.api.PhotoService
 import com.example.aslcodingtestproject.domain.repository.IBasePhotoRepository

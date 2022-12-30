@@ -1,4 +1,4 @@
-package com.example.aslcodingtestproject.domain.usecase
+package com.example.aslcodingtestproject.domain
 
 import com.example.aslcodingtestproject.common.Resource
 import retrofit2.Response
