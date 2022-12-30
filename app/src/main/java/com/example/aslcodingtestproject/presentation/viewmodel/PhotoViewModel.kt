@@ -1,15 +1,17 @@
 package com.example.aslcodingtestproject.presentation.viewmodel
 
-import androidx.lifecycle.*
-import com.example.aslcodingtestproject.data.entities.PhotoDatabaseItem
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.aslcodingtestproject.common.Resource
+import com.example.aslcodingtestproject.data.entities.PhotoDatabaseItem
+import com.example.aslcodingtestproject.di.DispatchersProvider
 import com.example.aslcodingtestproject.domain.repository.IBasePhotoCommentRepository
 import com.example.aslcodingtestproject.domain.repository.IBasePhotoRepository
 import com.example.aslcodingtestproject.presentation.photocomment.PhotoCommentItem
 import com.example.aslcodingtestproject.presentation.photos.PhotoItem
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.util.*
@@ -19,7 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class PhotoViewModel @Inject constructor(
     private val photoRepository: IBasePhotoRepository,
-    private val photoCommentRepository: IBasePhotoCommentRepository
+    private val photoCommentRepository: IBasePhotoCommentRepository,
+    private val dispatchersProvider: DispatchersProvider // Already inject in AppModule and replace hardcoding dispatcher
 ) : ViewModel() {
 
     val photos: LiveData<List<PhotoItem>?> get() = _photos
@@ -32,15 +35,13 @@ class PhotoViewModel @Inject constructor(
     private val _status = MutableLiveData<Resource.Status>()
 
     // photo handle
-    @OptIn(DelicateCoroutinesApi::class)
-    fun savePhotoIntoDatabase(photo: List<PhotoDatabaseItem>) = viewModelScope.launch {
-        GlobalScope.launch { photoRepository.insertPhoto(photo) }.join()
+    private fun savePhotoIntoDatabase(photo: List<PhotoDatabaseItem>) = viewModelScope.launch(dispatchersProvider.io) {
+        photoRepository.insertPhoto(photo)
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
-    private fun observePhotoFromDb() {
+    private fun observePhotoFromDb() = viewModelScope.launch(dispatchersProvider.default) {
         // launch a coroutine to run in background thread
-        GlobalScope.launch {
+
             val photosDatabase = photoRepository.getPhotoFromDb()
             Timber.i("observePhotoFromDb() $photosDatabase")
             if (photosDatabase.isNotEmpty()) {
@@ -55,10 +56,10 @@ class PhotoViewModel @Inject constructor(
                     )
                 })
             }
-        }
+
     }
 
-    fun getPhotoFromApi() = viewModelScope.launch {
+    fun getPhotoFromApi() = viewModelScope.launch(dispatchersProvider.default) {
         val resp = photoRepository.getPhotoFromApi()
         when (resp.status) {
             Resource.Status.LOADING -> {
@@ -105,7 +106,7 @@ class PhotoViewModel @Inject constructor(
     }
 
     fun getPhotoCommentFromApi(id: String) =
-        viewModelScope.launch {
+        viewModelScope.launch(dispatchersProvider.default) {
             val resp = photoCommentRepository.getPhotoCommentFromApi(id)
             when (resp.status) {
                 Resource.Status.LOADING -> {

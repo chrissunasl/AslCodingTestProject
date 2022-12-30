@@ -24,11 +24,11 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 /**
- * Retrofit
+ * AppModule Injection
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object PhotoModule {
+object AppModule {
 
     // Build Retrofit
     @Singleton
@@ -75,4 +75,9 @@ object PhotoModule {
     fun providePhotoCommentRepository(apiService: PhotoService
     ) = PhotoCommentRepository(apiService) as IBasePhotoCommentRepository
 
+    @Singleton
+    @Provides
+    fun provideDispatchersProvider() : DispatchersProvider {
+        return DispatchersImpl()
+    }
 }
