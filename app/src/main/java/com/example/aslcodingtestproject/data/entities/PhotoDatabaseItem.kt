@@ -7,14 +7,12 @@ import java.io.Serializable
 // Entity for room database
 @Entity
 data class PhotoDatabaseItem(
-    val albumId: Int,
-    val id: Int,
-    val thumbnailUrl: String = "",
-    val title: String = "",
-    val url: String = ""
-): Serializable {
     @PrimaryKey
-    var pId: Int = id
-}
+    val id: Int,
+    val albumId: Int,
+    val thumbnailUrl: String,
+    val title: String,
+    val url: String
+): Serializable
 
 

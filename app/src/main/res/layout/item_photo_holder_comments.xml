@@ -51,7 +51,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:imageTitle="@{photoComment.body}"
+                android:text = "@{photoComment.body}"
                 android:padding="15dp"
                 android:textAlignment="center"
                 android:maxLength="128"/>

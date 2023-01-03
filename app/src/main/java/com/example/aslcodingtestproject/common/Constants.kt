@@ -8,7 +8,7 @@ object IConstants {
     }
 
     object API {
-        // Request Timeout Second
+        // Request Timeout MilliSecond
         const val REQUEST_TIMEOUT = 15000L
     }
 }

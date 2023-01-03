@@ -50,16 +50,11 @@ class PhotoThumbnailListFragment : Fragment() {
         binding.llRefresh.isRefreshing = true
         photoListAdapter = PhotoListAdapter(
             onCustomItemClickListener = object : OnCustomItemClickListener<PhotoItem> {
-                override fun onClick(view: View?, item: PhotoItem) {
-                    val extras = FragmentNavigatorExtras(view!! to "ivPhotoBig")
-                    val args = Bundle()
-                    args.putParcelable("photoItem", item)
-
+                override fun onClick(view: View, item: PhotoItem) {
+                    val extras = FragmentNavigatorExtras(view to "ivPhotoBig")
                     findNavController().navigate(
-                        resId = R.id.actionPhotoThumbnailListFragmentToPhotoCommentFragment,
-                        args = args,
-                        navOptions = null,
-                        navigatorExtras = extras
+                        PhotoThumbnailListFragmentDirections.actionPhotoThumbnailListFragmentToPhotoCommentFragment(item),
+                        extras
                     )
                 }
             }

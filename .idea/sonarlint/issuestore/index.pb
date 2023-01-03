@@ -1,7 +1,25 @@
 
-<
-build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
-ƒ
-Sapp/src/main/java/com/example/aslcodingtestproject/presentation/photos/PhotoItem.kt,3/8/38fb1b677e846012087489bbacb2e7d009f6c56d
-„
-Tapp/src/main/java/com/example/aslcodingtestproject/data/remote/resp/PhotoRespItem.kt,3/1/317df67da395b47c832f9ae9f66773d4dfd7579b
+‚
+Rapp/src/main/java/com/example/aslcodingtestproject/data/remote/api/PhotoService.kt,1/a/1a804d551a99a521fc97a6e96f6c1fd7b422d943
+}
+Mapp/src/main/java/com/example/aslcodingtestproject/data/local/dao/PhotoDao.kt,1/8/18f0c77d08e0131784187d8d6565017c0997e8ee
+u
+Eapp/src/main/java/com/example/aslcodingtestproject/common/Resource.kt,d/7/d7449c7d58fccb9c788f29bad91650ac7155e3f1
+
+`app/src/main/java/com/example/aslcodingtestproject/presentation/photocomment/PhotoCommentItem.kt,b/c/bc26c3a16761a8fb381fee9e73b7835670b90b19
+‘
+aapp/src/main/java/com/example/aslcodingtestproject/common/interceptor/MyHttpLoggingInterceptor.kt,a/4/a41151e491bb0c97e187929c535c7d8c03b842aa
+
+Qapp/src/main/java/com/example/aslcodingtestproject/data/local/room/AppDatabase.kt,6/9/69bbe47bfc0185676501603f6da4edd438adfa98
+z
+Japp/src/main/java/com/example/aslcodingtestproject/common/CheckInternet.kt,e/9/e9c077d11785a80f4202b80ed64b743802496108
+›
+kapp/src/main/java/com/example/aslcodingtestproject/presentation/photocomment/adapter/PhotoCommentAdapter.kt,b/d/bdb56faac3635e1e4b939c60f337f548df5c1139
+7
+gradlew,5/b/5bbfa66edb4db3c7c33c5181f43510990d3307f9
+X
+(gradle/wrapper/gradle-wrapper.properties,f/b/fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
+A
+gradle.properties,2/a/2afbb999f001938c88fa43fc2ef52abf0f8213e4
+P
+ app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e

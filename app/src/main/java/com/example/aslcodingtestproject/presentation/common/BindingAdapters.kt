@@ -1,7 +1,6 @@
 package com.example.aslcodingtestproject.presentation.common
 
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import coil.load
@@ -23,11 +22,4 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
     }
 }
 
-/**
- * Adapter set text
- */
-@BindingAdapter("imageTitle")
-fun bindTitle(textView: TextView, displayString: String?) {
-    textView.text = displayString
-}
 

@@ -8,9 +8,9 @@ import java.io.Serializable
 @Parcelize
 data class PhotoItem(
     val id: Int,
-    val thumbnailUrl: String = "",
-    val title: String = "",
-    val url: String = ""
+    val thumbnailUrl: String,
+    val title: String,
+    val url: String
 ): Serializable, Parcelable
 
 

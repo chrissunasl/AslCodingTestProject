@@ -8,9 +8,9 @@ import kotlinx.parcelize.Parcelize
 data class PhotoRespItem(
     val albumId: Int,
     val id: Int,
-    val thumbnailUrl: String = "",
-    val title: String = "",
-    val url: String = ""
+    val thumbnailUrl: String,
+    val title: String,
+    val url: String
 ): Parcelable
 
 

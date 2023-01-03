@@ -8,12 +8,12 @@ import java.util.concurrent.TimeUnit
 object MyOkHttpClient {
 
     fun getOkHttpClient(): OkHttpClient {
-        val timeoutInSeconds: Long = IConstants.API.REQUEST_TIMEOUT
+        val timeoutInMilliSeconds: Long = IConstants.API.REQUEST_TIMEOUT
 
         val builder = OkHttpClient().newBuilder()
-            .connectTimeout(timeoutInSeconds, TimeUnit.MILLISECONDS) // connect timeout
-            .readTimeout(timeoutInSeconds, TimeUnit.MILLISECONDS) // socket timeout
-            .writeTimeout(timeoutInSeconds, TimeUnit.MILLISECONDS)
+            .connectTimeout(timeoutInMilliSeconds, TimeUnit.MILLISECONDS) // connect timeout
+            .readTimeout(timeoutInMilliSeconds, TimeUnit.MILLISECONDS) // socket timeout
+            .writeTimeout(timeoutInMilliSeconds, TimeUnit.MILLISECONDS)
             .retryOnConnectionFailure(false)
             .addInterceptor(HeaderInterceptor.getHeaderInterceptor())
             .addInterceptor(MyHttpLoggingInterceptor.getInstance())

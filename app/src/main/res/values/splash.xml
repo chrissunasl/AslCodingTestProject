@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.App.Launch" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">#5CFF5C</item>
+        <item name="windowSplashScreenBackground">@color/splash_screen_background</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_color_lens_splash</item>
         <item name="postSplashScreenTheme">@style/Theme.AslCodingTestProject</item>
     </style>

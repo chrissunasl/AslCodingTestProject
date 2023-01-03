@@ -39,7 +39,7 @@ class PhotoViewModel @Inject constructor(
         photoRepository.insertPhoto(photo)
     }
 
-    private fun observePhotoFromDb() = viewModelScope.launch(dispatchersProvider.default) {
+    private fun getPhotoFromDb() = viewModelScope.launch(dispatchersProvider.default) {
         // launch a coroutine to run in background thread
 
             val photosDatabase = photoRepository.getPhotoFromDb()
@@ -95,12 +95,12 @@ class PhotoViewModel @Inject constructor(
 
                 } else {
                     _status.postValue(resp.status)
-                    observePhotoFromDb()
+                    getPhotoFromDb()
                 }
             }
             Resource.Status.ERROR -> {
                 _status.postValue(resp.status)
-                observePhotoFromDb()
+                getPhotoFromDb()
             }
         }
     }
