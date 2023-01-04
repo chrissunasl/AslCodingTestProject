@@ -2,7 +2,7 @@ package com.example.aslcodingtestproject.domain.repository
 
 import com.example.aslcodingtestproject.common.Resource
 import com.example.aslcodingtestproject.data.entities.PhotoDatabaseItem
-import com.example.aslcodingtestproject.data.remote.resp.PhotoRespItem
+import com.example.aslcodingtestproject.presentation.photos.PhotoItem
 
 // interface
 interface IBasePhotoRepository {
@@ -11,6 +11,6 @@ interface IBasePhotoRepository {
 
     suspend fun getPhotoFromDb() : List<PhotoDatabaseItem>
 
-    suspend fun getPhotoFromApi(): Resource<List<PhotoRespItem>>
+    suspend fun getPhotos(): Resource<List<PhotoItem>>
 
 }

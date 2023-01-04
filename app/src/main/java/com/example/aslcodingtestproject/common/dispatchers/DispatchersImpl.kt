@@ -1,4 +1,4 @@
-package com.example.aslcodingtestproject.di
+package com.example.aslcodingtestproject.common.dispatchers
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

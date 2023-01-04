@@ -8,7 +8,7 @@ import timber.log.Timber
 suspend fun <A> performPhotoOperation(
     networkCall: suspend () -> Response<A>,
     callResult: suspend (A?) -> Unit = {},
-): Resource<A>{
+): Resource<A> {
     return try {
         val response = networkCall.invoke()
         Timber.tag("DAS").d(" %s", response.body())

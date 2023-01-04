@@ -29,7 +29,6 @@ class PhotoThumbnailListFragment : Fragment() {
     private val photoViewModel: PhotoViewModel by viewModels()
     private val binding get() = _binding!!
     private lateinit var photoListAdapter: PhotoListAdapter
-    private var photoDataList: List<PhotoItem> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,10 +66,11 @@ class PhotoThumbnailListFragment : Fragment() {
 
         binding.ivSearch.setOnClickListener {
             if (binding.etSearch.text.toString().isNotEmpty()) {
+                Timber.d("photos: ${photoViewModel.photos.value}")
                 binding.rvPhotoThumbnail.scrollToPosition(
                     photoViewModel.findPositionByTitle(
                         binding.etSearch.text.toString(),
-                        photoDataList
+                        photoViewModel.photos.value
                     )
                 )
 
@@ -92,7 +92,6 @@ class PhotoThumbnailListFragment : Fragment() {
                 binding.tvStatus.text = getString(R.string.common_no_record)
 
             } else {
-                photoDataList = data
                 binding.tvStatus.visibility = View.GONE
                 photoListAdapter.submitList(data)
             }
@@ -106,7 +105,7 @@ class PhotoThumbnailListFragment : Fragment() {
     }
 
     private fun getPhotoFromApi() {
-        photoViewModel.getPhotoFromApi()
+        photoViewModel.refreshPhotoList()
     }
 
     override fun onResume() {

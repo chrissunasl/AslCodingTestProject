@@ -3,6 +3,8 @@ package com.example.aslcodingtestproject.di
 import android.content.Context
 import com.example.aslcodingtestproject.common.IConstants
 import com.example.aslcodingtestproject.common.converter.EnumConverterFactory
+import com.example.aslcodingtestproject.common.dispatchers.DispatchersImpl
+import com.example.aslcodingtestproject.common.dispatchers.DispatchersProvider
 import com.example.aslcodingtestproject.data.local.dao.PhotoDao
 import com.example.aslcodingtestproject.data.local.room.AppDatabase
 import com.example.aslcodingtestproject.common.interceptor.MyOkHttpClient

@@ -1,17 +1,17 @@
 package com.example.aslcodingtestproject.data.repository
 
 import com.example.aslcodingtestproject.common.Resource
+import com.example.aslcodingtestproject.common.mapper.photoDatabaseItemListToPhotoItemList
+import com.example.aslcodingtestproject.common.mapper.photoRespItemListToPhotoDatabaseItemList
+import com.example.aslcodingtestproject.common.mapper.photoRespItemListToPhotoItemList
 import com.example.aslcodingtestproject.data.entities.PhotoDatabaseItem
 import com.example.aslcodingtestproject.data.local.dao.PhotoDao
+import com.example.aslcodingtestproject.data.performPhotoOperation
 import com.example.aslcodingtestproject.data.remote.api.PhotoService
-import com.example.aslcodingtestproject.data.remote.resp.PhotoRespItem
 import com.example.aslcodingtestproject.domain.repository.IBasePhotoRepository
-import retrofit2.HttpException
+import com.example.aslcodingtestproject.presentation.photos.PhotoItem
 import timber.log.Timber
-import java.io.IOException
 import javax.inject.Inject
-
-const val TAG = "PhotoRepository"
 
 // get data
 class PhotoRepository @Inject constructor(
@@ -31,21 +31,32 @@ class PhotoRepository @Inject constructor(
         return dao.queryPhotoList()
     }
 
-    override suspend fun getPhotoFromApi(): Resource<List<PhotoRespItem>> {
-        return try {
-            val responseData = apiService.getImg()
-            if (responseData.isSuccessful && responseData.body() != null){
-                Resource.success(responseData.body())
-            }else{
-                Resource.error("not successful", null)
+    override suspend fun getPhotos(): Resource<List<PhotoItem>> {
+        val res = performPhotoOperation(
+            networkCall = {
+                apiService.getImg()
+            },
+            callResult = {
+                if (!it.isNullOrEmpty()) {
+                    insertPhoto(photoRespItemListToPhotoDatabaseItemList(it))
+                }
             }
-        } catch (e: IOException) {
-            Timber.tag(TAG).d("IOException, check internet connection")
-            Resource.error("IOException, check internet connection", null)
-        } catch (e: HttpException) {
-            Timber.tag(TAG).d("HttpException, unexpected response")
-            Resource.error("HttpException, unexpected response", null)
+        )
+
+        return if(res.data != null){
+            Resource.success(photoRespItemListToPhotoItemList(res.data).sortedBy { it.title })
+        }else{
+            val photosDatabase = getPhotoFromDb()
+            Timber.i("observePhotoFromDb() $photosDatabase")
+            if (photosDatabase.isNotEmpty()) {
+                // sort and map to view display object
+                photosDatabase.sortedBy { it.title }
+                Resource.success(photoDatabaseItemListToPhotoItemList(photosDatabase).sortedBy { it.title })
+            }else{
+                Resource.error("Error", null)
+            }
         }
+
     }
 
 }
