@@ -13,7 +13,7 @@ import com.example.aslcodingtestproject.data.entities.PhotoDatabaseItem
     entities = [
         PhotoDatabaseItem::class,
     ],
-    version = 26,
+    version = 27,
     exportSchema = false
 )
 

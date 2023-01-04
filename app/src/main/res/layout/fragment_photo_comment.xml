@@ -4,9 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="photo"
             type="com.example.aslcodingtestproject.presentation.photos.PhotoItem" />
+
+        <variable
+            name="viewmodel"
+            type="com.example.aslcodingtestproject.presentation.viewmodel.PhotoViewModel" />
     </data>
 
 
@@ -15,7 +20,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".presentation.photos.view.PhotoThumbnailListFragment">
-
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBar"
@@ -57,20 +61,22 @@
                         android:id="@+id/ivPhoto"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:scaleType="fitXY"
-                        android:minHeight="150dp"
-                        android:transitionName="ivPhotoBig"
+                        android:layout_gravity="center"
                         android:layout_marginBottom="70dp"
                         android:contentDescription="@string/photo_url_from_api"
-                        app:imageUrl="@{photo.url}"
-                        android:layout_gravity="center" />
+                        android:minHeight="150dp"
+                        android:scaleType="fitXY"
+                        android:transitionName="ivPhotoBig"
+                        app:imageUrl="@{photo.url}" />
                 </LinearLayout>
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:navigationIcon="@drawable/arrow_back"/>
+                    app:navigationIcon="@drawable/arrow_back" />
+
+
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>

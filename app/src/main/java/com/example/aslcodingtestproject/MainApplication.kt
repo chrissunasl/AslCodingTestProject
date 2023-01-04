@@ -11,18 +11,11 @@ import timber.log.Timber.Forest.plant
 @HiltAndroidApp
 class MainApplication : Application() {
 
-    companion object {
-        private var instance: MainApplication? = null
-    }
-
     override fun onCreate() {
         super.onCreate()
-        instance = this
         if (BuildConfig.DEBUG) {
             plant(Timber.DebugTree())
         }
-
     }
-
 
 }

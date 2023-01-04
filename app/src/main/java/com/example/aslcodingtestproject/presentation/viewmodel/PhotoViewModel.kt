@@ -28,6 +28,7 @@ class PhotoViewModel @Inject constructor(
     val photos: LiveData<List<PhotoItem>?> get() = _photos
     private val _photos = MutableLiveData<List<PhotoItem>?>()
 
+
     val photoComments: LiveData<List<PhotoCommentItem>?> get() = _photoComments
     private val _photoComments = MutableLiveData<List<PhotoCommentItem>?>()
 
@@ -39,7 +40,7 @@ class PhotoViewModel @Inject constructor(
         photoRepository.insertPhoto(photo)
     }
 
-    private fun getPhotoFromDb() = viewModelScope.launch(dispatchersProvider.default) {
+    private fun getPhotoFromDb() = viewModelScope.launch(dispatchersProvider.io) {
         // launch a coroutine to run in background thread
 
             val photosDatabase = photoRepository.getPhotoFromDb()
@@ -59,7 +60,7 @@ class PhotoViewModel @Inject constructor(
 
     }
 
-    fun getPhotoFromApi() = viewModelScope.launch(dispatchersProvider.default) {
+    fun getPhotoFromApi() = viewModelScope.launch(dispatchersProvider.io) {
         val resp = photoRepository.getPhotoFromApi()
         when (resp.status) {
             Resource.Status.LOADING -> {
@@ -144,5 +145,6 @@ class PhotoViewModel @Inject constructor(
             0
         }
     }
+
 
 }

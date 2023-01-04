@@ -47,6 +47,7 @@ object AppModule {
         .addConverterFactory(EnumConverterFactory())
         .build()
 
+
     // Use retrofit
     @Singleton
     @Provides
