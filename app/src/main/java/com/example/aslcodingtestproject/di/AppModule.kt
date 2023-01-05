@@ -5,16 +5,10 @@ import com.example.aslcodingtestproject.common.IConstants
 import com.example.aslcodingtestproject.common.converter.EnumConverterFactory
 import com.example.aslcodingtestproject.common.dispatchers.DispatchersImpl
 import com.example.aslcodingtestproject.common.dispatchers.DispatchersProvider
-import com.example.aslcodingtestproject.data.local.dao.PhotoDao
-import com.example.aslcodingtestproject.data.local.room.AppDatabase
 import com.example.aslcodingtestproject.common.interceptor.MyOkHttpClient
+import com.example.aslcodingtestproject.data.local.room.AppDatabase
 import com.example.aslcodingtestproject.data.remote.api.PhotoService
-import com.example.aslcodingtestproject.domain.repository.IBasePhotoCommentRepository
-import com.example.aslcodingtestproject.domain.repository.IBasePhotoRepository
-import com.example.aslcodingtestproject.data.repository.PhotoCommentRepository
-import com.example.aslcodingtestproject.data.repository.PhotoRepository
 import com.google.gson.GsonBuilder
-
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -65,18 +59,6 @@ object AppModule {
     @Singleton
     @Provides
     fun PhotoDao(db: AppDatabase) = db.getPhotoDao()
-
-    // Definition of dependency injection binding
-    @Singleton
-    @Provides
-    fun providePhotoRepository(apiService: PhotoService,
-                               dao: PhotoDao
-    ) = PhotoRepository(apiService, dao) as IBasePhotoRepository
-
-    @Singleton
-    @Provides
-    fun providePhotoCommentRepository(apiService: PhotoService
-    ) = PhotoCommentRepository(apiService) as IBasePhotoCommentRepository
 
     @Singleton
     @Provides

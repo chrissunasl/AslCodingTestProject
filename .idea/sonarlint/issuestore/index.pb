@@ -5,10 +5,6 @@ Mapp/src/main/java/com/example/aslcodingtestproject/data/local/dao/PhotoDao.kt,
 `app/src/main/java/com/example/aslcodingtestproject/presentation/photocomment/PhotoCommentItem.kt,b/c/bc26c3a16761a8fb381fee9e73b7835670b90b19
 ‘
 aapp/src/main/java/com/example/aslcodingtestproject/common/interceptor/MyHttpLoggingInterceptor.kt,a/4/a41151e491bb0c97e187929c535c7d8c03b842aa
-z
-Japp/src/main/java/com/example/aslcodingtestproject/common/CheckInternet.kt,e/9/e9c077d11785a80f4202b80ed64b743802496108
-›
-kapp/src/main/java/com/example/aslcodingtestproject/presentation/photocomment/adapter/PhotoCommentAdapter.kt,b/d/bdb56faac3635e1e4b939c60f337f548df5c1139
 7
 gradlew,5/b/5bbfa66edb4db3c7c33c5181f43510990d3307f9
 X

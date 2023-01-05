@@ -13,7 +13,7 @@ import com.example.aslcodingtestproject.presentation.photocomment.PhotoCommentIt
 //Cus adapter for comment
 
 class PhotoCommentAdapter(
-    private val act: Context,
+    private val context: Context,
 ) : ListAdapter<PhotoCommentItem, PhotoCommentAdapter.ItemViewHolder>(PhotoCommentListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -33,7 +33,7 @@ class PhotoCommentAdapter(
     inner class ItemViewHolder(private val binding: ItemPhotoHolderCommentsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: PhotoCommentItem, position: Int) {
-            binding.tvComment.text =  act.getString(R.string.common_comment_with_colon, (position+1).toString())
+            binding.tvComment.text =  context.getString(R.string.common_comment_with_colon, (position+1).toString())
             binding.photoComment = item
             binding.executePendingBindings()
         }
