@@ -33,7 +33,15 @@ class PhotoViewModel @Inject constructor(
     val status: LiveData<Resource.Status> get() = _status
     private val _status = MutableLiveData<Resource.Status>()
 
-    fun refreshPhotoList() = viewModelScope.launch(dispatchersProvider.io) {
+    fun onRefreshPhotos(){
+        refreshPhotoList()
+    }
+
+    fun onRefreshPhotoComments(id: String){
+        getPhotoComments(id)
+    }
+
+    private fun refreshPhotoList() = viewModelScope.launch(dispatchersProvider.io) {
         val resp = photoRepository.getPhotos()
         when (resp.status) {
             Resource.Status.LOADING -> {
@@ -51,7 +59,7 @@ class PhotoViewModel @Inject constructor(
         }
     }
 
-    fun getPhotoComments(id: String) =
+    private fun getPhotoComments(id: String) =
         viewModelScope.launch(dispatchersProvider.default) {
             val resp = photoCommentRepository.getPhotoComments(id)
             when (resp.status) {

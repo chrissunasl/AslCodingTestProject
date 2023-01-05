@@ -89,7 +89,7 @@ class PhotoCommentFragment : Fragment() {
     }
 
     private fun getPhotoCommentFromApi() {
-        photoViewModel.getPhotoComments(args.photoItem.id.toString())
+        photoViewModel.onRefreshPhotoComments(args.photoItem.id.toString())
     }
 
     override fun onResume() {

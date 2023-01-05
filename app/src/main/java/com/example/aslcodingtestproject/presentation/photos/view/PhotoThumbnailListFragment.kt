@@ -105,11 +105,12 @@ class PhotoThumbnailListFragment : Fragment() {
     }
 
     private fun getPhotoFromApi() {
-        photoViewModel.refreshPhotoList()
+        photoViewModel.onRefreshPhotos()
     }
 
     override fun onResume() {
         super.onResume()
         getPhotoFromApi()
     }
+
 }
