@@ -1,9 +1,9 @@
 package com.example.aslcodingtestproject.di
 
-import com.example.aslcodingtestproject.data.repository.PhotoCommentRepository
-import com.example.aslcodingtestproject.data.repository.PhotoRepository
-import com.example.aslcodingtestproject.domain.repository.IBasePhotoCommentRepository
-import com.example.aslcodingtestproject.domain.repository.IBasePhotoRepository
+import com.example.aslcodingtestproject.displayphotos.data.repository.PhotoCommentRepositoryImpl
+import com.example.aslcodingtestproject.displayphotos.data.repository.PhotoRepositoryImpl
+import com.example.aslcodingtestproject.displayphotos.domain.repository.IPhotoCommentRepository
+import com.example.aslcodingtestproject.displayphotos.domain.repository.IPhotoRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -20,10 +20,10 @@ abstract class RepositoryModule {
     // Binds replace Provide: single param & less code
     @Binds
     @Singleton
-    abstract fun bindPhotoRepository(photoRepository: PhotoRepository) : IBasePhotoRepository
+    abstract fun bindPhotoRepository(photoRepositoryImpl: PhotoRepositoryImpl) : IPhotoRepository
 
     @Binds
     @Singleton
-    abstract fun bindPhotoCommentRepository(photoCommentRepository: PhotoCommentRepository) : IBasePhotoCommentRepository
+    abstract fun bindPhotoCommentRepository(photoCommentRepositoryImpl: PhotoCommentRepositoryImpl) : IPhotoCommentRepository
 
 }

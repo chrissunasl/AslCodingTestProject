@@ -1,10 +1,10 @@
 package com.example.aslcodingtestproject.common.mapper
 
-import com.example.aslcodingtestproject.data.entities.PhotoDatabaseItem
-import com.example.aslcodingtestproject.data.remote.resp.PhotoCommentRespItem
-import com.example.aslcodingtestproject.data.remote.resp.PhotoRespItem
-import com.example.aslcodingtestproject.presentation.photocomment.PhotoCommentItem
-import com.example.aslcodingtestproject.presentation.photos.PhotoItem
+import com.example.aslcodingtestproject.displayphotos.data.entities.PhotoDatabaseItem
+import com.example.aslcodingtestproject.displayphotos.data.remote.resp.PhotoCommentRespItem
+import com.example.aslcodingtestproject.displayphotos.data.remote.resp.PhotoRespItem
+import com.example.aslcodingtestproject.displayphotos.presentation.photocomment.PhotoCommentItem
+import com.example.aslcodingtestproject.displayphotos.presentation.photos.PhotoItem
 
 fun photoRespItemListToPhotoItemList(photoRespItemList: List<PhotoRespItem>): List<PhotoItem> {
     val photoItemList = photoRespItemList.sortedBy { it.title }.map {

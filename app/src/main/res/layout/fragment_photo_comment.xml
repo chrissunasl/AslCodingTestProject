@@ -7,11 +7,8 @@
 
         <variable
             name="photo"
-            type="com.example.aslcodingtestproject.presentation.photos.PhotoItem" />
+            type="com.example.aslcodingtestproject.displayphotos.presentation.photos.PhotoItem" />
 
-        <variable
-            name="viewmodel"
-            type="com.example.aslcodingtestproject.presentation.viewmodel.PhotoViewModel" />
     </data>
 
 

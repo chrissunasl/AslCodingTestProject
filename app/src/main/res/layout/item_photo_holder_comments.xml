@@ -6,7 +6,7 @@
     <data>
         <variable
             name="photoComment"
-            type="com.example.aslcodingtestproject.presentation.photocomment.PhotoCommentItem" />
+            type="com.example.aslcodingtestproject.displayphotos.presentation.photocomment.PhotoCommentItem" />
     </data>
 
     <androidx.cardview.widget.CardView

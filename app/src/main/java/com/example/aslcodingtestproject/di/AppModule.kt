@@ -6,8 +6,8 @@ import com.example.aslcodingtestproject.common.converter.EnumConverterFactory
 import com.example.aslcodingtestproject.common.dispatchers.DispatchersImpl
 import com.example.aslcodingtestproject.common.dispatchers.DispatchersProvider
 import com.example.aslcodingtestproject.common.interceptor.MyOkHttpClient
-import com.example.aslcodingtestproject.data.local.room.AppDatabase
-import com.example.aslcodingtestproject.data.remote.api.PhotoService
+import com.example.aslcodingtestproject.displayphotos.data.local.room.AppDatabase
+import com.example.aslcodingtestproject.displayphotos.data.remote.api.PhotoService
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
